@@ -56,7 +56,6 @@ const UpdateEmployee = () => {
     useEffect(() => {
         const getRoles = async () => {
             const response = await getCompanyRoles();
-            console.log('response', response)
             const roles: rolesOption[] = [];
             for (let i = 0; i < response.length; i++) {
                 roles.push({
@@ -69,7 +68,6 @@ const UpdateEmployee = () => {
 
         const getEmployee = async () => {
             const response = await getCompanyEmployeeById(Id);
-            console.log('response', response);
 
             if (response.date_of_birth) {
                 const dateObject = new Date(response.date_of_birth);
@@ -95,7 +93,6 @@ const UpdateEmployee = () => {
                 response.last_increment_date = `${year3}-${month3}-${day3}`
             }
             setEmployeeData(response)
-            console.log(employeeData);
             const roles: rolesOption[] = [];
             const roles_id: number[] = [];
             for (let i = 0; i < response.roles.length; i++) {
@@ -139,7 +136,6 @@ const UpdateEmployee = () => {
     });
     const onSubmit = async (values: IupdateCompanyEmployee) => {
 
-        // console.log('roles_id',rolesDataId)
         //const emp_id = values.emp_id
         const email = values.email;
         const name = values.name;
@@ -209,7 +205,6 @@ const UpdateEmployee = () => {
         }
     };
     const handleSelect = (e: any) => {
-        console.log(e)
         const rolesId = [];
         const roles: rolesOption[] = [];
         for (let i = 0; i < e.length; i++) {
@@ -221,7 +216,6 @@ const UpdateEmployee = () => {
         }
         setInitiallySelectedOptions(roles)
         setRolesDataId(rolesId);
-        console.log(rolesDataId);
         if (select_isTouched) {
             validateSelection(rolesDataId);
         }

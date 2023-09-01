@@ -18,6 +18,10 @@ import FinanceCategoriesPage from "pages/FinanceCategories";
 import AddFinanceCategory from "components/finance_categories/addFinanceCategory";
 import Add_FinanceCategoryPage from "pages/Add_FinanceCategory";
 import Update_FinanceCategoryPage from "pages/Update_FinanceCategory";
+import Add_InventoryStorePage from "pages/AddStore_inventory";
+import Add_InventoryCategoryPage from "pages/AddCategory_inventory";
+import Add_InventoryItemPage from "pages/AddItem_inventory";
+import UpdateInventoryCategoryPage from "pages/UpdateCategory_inventory";
 
 const routes: IRoute[] = [
     {
@@ -115,6 +119,26 @@ const routes: IRoute[] = [
         path: '/update_financeCategories/:category_id',
         name: 'Update_FinanceCategories',
         component: Update_FinanceCategoryPage
+    },
+    {
+        path: '/add_Store',
+        name: 'Add_Store',
+        component: Add_InventoryStorePage
+    },
+    {
+        path: '/add_Category',
+        name: 'Add_Category',
+        component: Add_InventoryCategoryPage
+    },
+    {
+        path: '/add_Item',
+        name: 'Add_Item',
+        component: Add_InventoryItemPage
+    },
+    {
+        path: '/update_Category/:cat_id',
+        name: 'Update_Category',
+        component: UpdateInventoryCategoryPage
     }
     // {
     //     path: '/my-ip',

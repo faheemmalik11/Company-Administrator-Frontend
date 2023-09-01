@@ -7,12 +7,12 @@ const Home: FC<object> = () => {
     return (
         <React.Fragment>
         <Link 
-            to="https://www.google.com/" 
+            to="https://www.celestialstech.com/" 
             className="text-3xl font-bold underline" 
             style={{color: 'black'}} 
             target='_blank'
         >
-            Company
+            Celestials Technologies Project Starter
         </Link>
         <br />
         <br />

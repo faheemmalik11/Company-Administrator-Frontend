@@ -15,7 +15,6 @@ const Dashboard = () => {
     console.log(navigate)
     useEffect(() => {
         if (user.roles.includes('all')) {
-            console.log('super admin')
             setWelcomeMessege('Welcome super admin')
             setIsAdmin(true)
         }

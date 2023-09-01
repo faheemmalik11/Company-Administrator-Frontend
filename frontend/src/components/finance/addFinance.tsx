@@ -29,7 +29,6 @@ const AddFinance = () => {
     useEffect(() => {
         const getFinanceCategory = async () => {
             const response = await getAllFinanceCategories();
-            console.log('response', response)
             const category: CategoryOption[] = [];
             for (let i = 0; i < response.finance_category.length; i++) {
                 category.push({
@@ -62,7 +61,6 @@ const AddFinance = () => {
             tax_deduction,
         });
         if (response.code === 200) {
-            console.log(response.data.message)
             setResponseMessage(response.data.message);
             setShowFinanceLink(true)
 
