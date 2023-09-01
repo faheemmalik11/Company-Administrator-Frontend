@@ -60,7 +60,7 @@ const Login = () => {
                                 <div className="login__card-header">
                                     <div className="flex-column flex-sm-row flex-md-row d-flex justify-content-between">
                                         <div className="login__card-text">
-                                            <p>Company Management System</p>
+                                            <p>CELESTIALS MANAGEMENT SYSTEM</p>
                                         </div>
                                     </div>
                                 </div>

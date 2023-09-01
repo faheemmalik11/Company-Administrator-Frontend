@@ -33,7 +33,6 @@ const UpdateFinance = () => {
     useEffect(() => {
         const getFinance = async () => {
             const response = await getAllFinanceCategories();
-            console.log('response', response)
             const category: CategoryOption[] = [];
             for (let i = 0; i < response.finance_category.length; i++) {
                 category.push({
@@ -43,7 +42,6 @@ const UpdateFinance = () => {
             }
             setFinanceCategoryOption(category)
             const responseFinance = await getFinanceDatabyId(finance_id);
-            console.log('response', response);
 
             setFinanceData(responseFinance)
 
@@ -52,7 +50,6 @@ const UpdateFinance = () => {
 
             for (let i = 0; i < category.length; i++) {
                 if (responseFinance.finance_category_id == category[i].value) {
-                    console.log('pakistan')
                     initiallySelectedCategory.label = category[i].label;
                     initiallySelectedCategory.value = category[i].value
                 }
@@ -63,9 +60,6 @@ const UpdateFinance = () => {
         getFinance()
 
     }, [])
-    console.log(financeCategoryOption)
-    console.log('initially selested options', initiallySelectedOption)
-    console.log('finance data by id', financeData)
     const validationSchema = Yup.object({
         amount: Yup.number().required('Amount is required'),
         check_number: Yup.string().required('Check No. is required'),
@@ -88,7 +82,6 @@ const UpdateFinance = () => {
             tax_deduction,
         }, finance_id);
         if (response.code === 200) {
-            console.log(response.data.message)
             setResponseMessage(response.data.message);
             navigate('/finance',{state:{finance_id:finance_id}});
         }

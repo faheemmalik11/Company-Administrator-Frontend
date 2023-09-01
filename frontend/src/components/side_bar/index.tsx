@@ -10,7 +10,6 @@ const SideBar = () => {
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
     useEffect(() => {
         if (user.roles.includes('all')) {
-            // console.log('super admin')
             setIsAdmin(true);
         }
     });

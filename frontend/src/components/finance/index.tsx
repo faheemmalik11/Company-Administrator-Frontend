@@ -22,7 +22,6 @@ const Finance = () => {
         const getAllFinance = async () => {
             setDeleteDependency(false);
             const response = await getAllFinanceData();
-            console.log('response', response);
 
             for (let i = 0; i < response.length; i++) {
                 if (response[i].updated_at) {

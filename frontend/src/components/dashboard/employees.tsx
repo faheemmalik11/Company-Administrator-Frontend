@@ -30,7 +30,6 @@ const Employees: React.FC<Props> = ({ update_id }) => {
             setHighlightedId(update_id)
 
             const response = await getCompanyEmployees();
-            console.log('response', response);
             for (let i = 0; i < response.length; i++) {
                 if (response[i].date_of_birth) {
                     const date = dateFormat(response[i].date_of_birth);

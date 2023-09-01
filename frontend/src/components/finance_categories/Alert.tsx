@@ -11,7 +11,6 @@ interface Props {
 const Alert:React.FC<Props> = ({responseMessage, setIsAlert, showFinanceLink, setShowFinanceLink}) => {
     const [color, setColor] = useState<string>('green');
     useEffect(()=>{
-        console.log('show color', showFinanceLink)
         if(showFinanceLink === true){
             setColor('green')
         }
@@ -19,7 +18,6 @@ const Alert:React.FC<Props> = ({responseMessage, setIsAlert, showFinanceLink, se
             setColor('red')
         }
     },[])
-    console.log('show color', color)
     const handleSuccessAlert = () => {
         setIsAlert(false);
         setShowFinanceLink(false);

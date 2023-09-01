@@ -1,65 +1,79 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { IaddFinanceCategory } from 'app/interfaces/add_financeCategories';
-import { addFinanceCategory } from 'services/finance_categories';
-import Alert from './Alert';
+import Alert from "components/Inventory/updateAlert";
+import { IaddCategory } from "app/interfaces/inventory_addCategory";
+import { getInventoryCategorybyId, updateInventoryCategory } from "services/inventory_categories";
 
-const financeInitialValues: IaddFinanceCategory = {
+const finance: IaddCategory = {
     name: '',
-    color_code: '',
     description: '',
 };
 
-const AddFinanceCategory = () => {
+const UpdateInventoryCategory = () => {
+    const { cat_id } = useParams();
+    const navigate = useNavigate();
+    const [categoryData, setCategoryData] = useState<IaddCategory>(finance);
     const [isAlert, setIsAlert] = useState<boolean>(false);
-    const [showFinanceLink, setShowFinanceLink] = useState<boolean>(false);
     const [responseMessage, setResponseMessage] = useState<string>('');
+
+    useEffect(() => {
+        const getFinance = async () => {
+            const response = await getInventoryCategorybyId(cat_id)
+            console.log('response', response);
+            setCategoryData(response)  
+        }
+        getFinance()
+
+    }, [])
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Name is required'),
-        color_code: Yup.string().required('Color Code is required'),
         description: Yup.string().max(255, 'Must be 255 characters or less').min(3, 'Minimum 3 characters'),
     });
-    const onSubmit = async (values: IaddFinanceCategory, { resetForm }: any) => {
+
+    const onSubmit = async (values: IaddCategory, { resetForm }: any) => {
         const name = values.name;
         const description = values.description;
-        const color_code = values.color_code;
 
-
-        const response = await addFinanceCategory({
+        const response = await updateInventoryCategory({
             name,
-            color_code,
             description
-        });
+        }, cat_id);
         if (response.code === 200) {
+            console.log(response.data.message)
             setResponseMessage(response.data.message);
-            setShowFinanceLink(true)
-
+            navigate('/categories',{state:{cat_id: cat_id}});
         }
         else {
             setResponseMessage(response.message)
+            setIsAlert(true);
         }
         // if(location.state !== null){
         //     location.state=null;
         // }
-        setIsAlert(true);
-        resetForm();
+        //setIsAlert(true);
+      //  resetForm();
     };
 
     return (
         <React.Fragment>
-            {isAlert && <Alert
-                responseMessage={responseMessage}
+             {isAlert && <Alert responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
-                showFinanceLink={showFinanceLink}
-                setShowFinanceLink={setShowFinanceLink} />}
-            <h1>Add Finance Data</h1>
-            <Formik initialValues={financeInitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                 />}
+            <h1>Update Finance Data</h1>
+            <Formik
+                initialValues={categoryData}
+                validationSchema={validationSchema}
+                enableReinitialize
+                onSubmit={onSubmit}
+                >
                 {({ errors, status, touched, resetForm }) => {
                     return (
                         <Form className="login__card-form">
                             <br />
+
                             <div>
                                 <label>Name</label>
                                 <br />
@@ -74,20 +88,6 @@ const AddFinanceCategory = () => {
                             </div>
                             <div style={{ color: 'red' }}>
                                 <ErrorMessage name="name" />
-                            </div>
-                            <div>
-                                <label>Color Code</label>
-                                <br />
-                                <div style={{ border: '1px solid black' }}>
-                                    <Field
-                                        name="color_code"
-                                        type="text"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                                    />
-                                </div>
-                            </div>
-                            <div style={{ color: 'red' }}>
-                                <ErrorMessage name="color_code" />
                             </div>
                             <div>
                                 <label>Description</label>
@@ -105,7 +105,7 @@ const AddFinanceCategory = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} >
+                                <button className="btn login__card-btn" type="submit" disabled={false}>
                                     Submit
                                 </button>
                             </div>
@@ -114,7 +114,7 @@ const AddFinanceCategory = () => {
                 }}
             </Formik>
         </React.Fragment>
-    );
+    )
 }
 
-export default AddFinanceCategory;
+export default UpdateInventoryCategory

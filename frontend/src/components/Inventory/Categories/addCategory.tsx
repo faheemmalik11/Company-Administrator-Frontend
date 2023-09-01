@@ -1,38 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { IaddFinanceCategory } from 'app/interfaces/add_financeCategories';
-import { addFinanceCategory } from 'services/finance_categories';
-import Alert from './Alert';
+import Alert from 'components/Inventory/Alert';
+import { IaddCategory } from 'app/interfaces/inventory_addCategory';
+import { addInventoryCategory } from 'services/inventory_categories';
 
-const financeInitialValues: IaddFinanceCategory = {
+const InitialValues: IaddCategory = {
     name: '',
-    color_code: '',
     description: '',
 };
 
-const AddFinanceCategory = () => {
+const AddInventoryCategory = () => {
     const [isAlert, setIsAlert] = useState<boolean>(false);
     const [showFinanceLink, setShowFinanceLink] = useState<boolean>(false);
     const [responseMessage, setResponseMessage] = useState<string>('');
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Name is required'),
-        color_code: Yup.string().required('Color Code is required'),
         description: Yup.string().max(255, 'Must be 255 characters or less').min(3, 'Minimum 3 characters'),
     });
-    const onSubmit = async (values: IaddFinanceCategory, { resetForm }: any) => {
+    const onSubmit = async (values: IaddCategory, { resetForm }: any) => {
         const name = values.name;
         const description = values.description;
-        const color_code = values.color_code;
 
-
-        const response = await addFinanceCategory({
+        const response = await addInventoryCategory({
             name,
-            color_code,
             description
         });
         if (response.code === 200) {
+            console.log(response.data.message)
             setResponseMessage(response.data.message);
             setShowFinanceLink(true)
 
@@ -53,9 +49,10 @@ const AddFinanceCategory = () => {
                 responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
                 showFinanceLink={showFinanceLink}
-                setShowFinanceLink={setShowFinanceLink} />}
+                setShowFinanceLink={setShowFinanceLink}
+                linkValue={'categories'} />}
             <h1>Add Finance Data</h1>
-            <Formik initialValues={financeInitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+            <Formik initialValues={InitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ errors, status, touched, resetForm }) => {
                     return (
                         <Form className="login__card-form">
@@ -74,20 +71,6 @@ const AddFinanceCategory = () => {
                             </div>
                             <div style={{ color: 'red' }}>
                                 <ErrorMessage name="name" />
-                            </div>
-                            <div>
-                                <label>Color Code</label>
-                                <br />
-                                <div style={{ border: '1px solid black' }}>
-                                    <Field
-                                        name="color_code"
-                                        type="text"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                                    />
-                                </div>
-                            </div>
-                            <div style={{ color: 'red' }}>
-                                <ErrorMessage name="color_code" />
                             </div>
                             <div>
                                 <label>Description</label>
@@ -117,4 +100,4 @@ const AddFinanceCategory = () => {
     );
 }
 
-export default AddFinanceCategory;
+export default AddInventoryCategory;
