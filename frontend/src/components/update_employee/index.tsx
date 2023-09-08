@@ -9,7 +9,7 @@ import { updateCompanyEmployee, uniqueEmail, uniqueCnic } from "services/employe
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { getCompanyRoles } from 'services/roles';
-import Alert from "./Alert";
+import Alert from "UI/updateAlert";
 import { useNavigate } from "react-router-dom";
 
 const Employee: IupdateCompanyEmployee = {

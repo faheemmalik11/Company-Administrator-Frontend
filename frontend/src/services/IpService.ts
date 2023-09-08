@@ -1,5 +1,5 @@
 import { MyIP, MyIPInfo } from 'app/interfaces/Ip';
-import http from './core/HttpService';
+import http from 'services/core/HttpService';
 // import apiConstants from "../constants/ApiConstant";
 
 export const getMyIp = async () => {

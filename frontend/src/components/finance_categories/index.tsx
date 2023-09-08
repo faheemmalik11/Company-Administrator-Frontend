@@ -52,7 +52,7 @@ const FinanceCategories = () => {
 
     return(
         <React.Fragment>
-            <SideBar />
+            {/* <SideBar /> */}
             <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
                 {isDeletePopup && <DeletePopup
                     setIsStatusPopup={setIsDeletePopup}

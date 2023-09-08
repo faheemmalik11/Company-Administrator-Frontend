@@ -51,8 +51,7 @@ const Finance = () => {
             setHighlightedId(0)
         }, 3000);
     }, [updateId])
-    console.log(financeData)
-    console.log(updateId)
+  //  console.log(updateId)
     const handleAddFinance = () => {
         navigate('/add_Finance')
     }
@@ -65,7 +64,7 @@ const Finance = () => {
     }
     return (
         <React.Fragment>
-            <SideBar />
+            {/* <SideBar /> */}
             <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
                 {isDeletePopup && <DeletePopup
                     setIsStatusPopup={setIsDeletePopup}

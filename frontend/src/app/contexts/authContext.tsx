@@ -1,9 +1,9 @@
 import { createContext, useReducer } from 'react';
 import cookie from 'js-cookie'
 
-import IProvider from '../interfaces/provider';
-import { IAuth } from '../interfaces/auth';
-import { AuthActions, AuthReducer } from '../contexts/reducers/auth';
+import IProvider from 'app/interfaces/provider';
+import { IAuth } from 'app/interfaces/auth';
+import { AuthActions, AuthReducer } from 'app/reducer/auth';
 
 
 const AuthContext = createContext <IAuth> (null!);

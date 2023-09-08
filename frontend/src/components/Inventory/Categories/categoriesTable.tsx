@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { dateFormat } from "utils/date";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DeletePopup from "./deletePopup";
 import Modal from "UI/Modal";
 import { Icategories } from "app/interfaces/inventory_categories";
@@ -12,6 +12,7 @@ interface Props {
 
 const CategoryTable: React.FC<Props> = ({ update_id }) => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [categoryData, setCategoryData] = useState<Icategories[]>([]);
     const [isDeletePopup, setIsDeletePopup] = useState<boolean>(false);
     const [finance_id, setFinance_id] = useState<number>();
@@ -22,10 +23,9 @@ const CategoryTable: React.FC<Props> = ({ update_id }) => {
     useEffect(() => {
         
         const getItems = async () => {
-            setHighlightedId(update_id)
+            //setHighlightedId(update_id)
             setDeleteDependency(false);
             const response = await getAllCategories();
-            console.log('response', response);
 
             for (let i = 0; i < response.length; i++) {
                 if (response[i].updated_at) {
@@ -46,9 +46,9 @@ const CategoryTable: React.FC<Props> = ({ update_id }) => {
         }
         getItems()
     }, [deleteDependency]);
-    //console.log('update id', update_id)
-    //console.log('update id', highlightedId)
+
     useEffect(() => {
+        setHighlightedId(update_id)
         setIsHighlighted(true)
         setTimeout(() => {
             setIsHighlighted(false);
@@ -90,7 +90,7 @@ const CategoryTable: React.FC<Props> = ({ update_id }) => {
                     {
                         categoryData.map(category => {
                             return (
-                                <tr className={((highlightedId == category.id) && isHighlighted) ? `border-2 border-green-600` : 'border-2'} key={category.id}>
+                                <tr className={((highlightedId == category.id) && isHighlighted) ? `bg-sky-500/100 border-2 border-green-600 ` : 'border-2'} key={category.id}>
                                     <td className="border-2">{category.id}</td>
                                     <td className="border-2">{category.name}</td>
                                     <td className="border-2">{category.description}</td>

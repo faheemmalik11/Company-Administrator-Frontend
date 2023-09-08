@@ -1,6 +1,6 @@
 import { IaddFinanceCategory } from 'app/interfaces/add_financeCategories';
-import config from '../config/config'
-import axios from "../utils/axios";
+import config from 'config/config'
+import axios from "utils/axios";
 
 export const getAllFinanceCategories = async () => {
     try {

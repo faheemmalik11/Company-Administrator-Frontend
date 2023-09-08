@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
-import AppConfig from '../config/config';
+import AppConfig from 'config/config';
 import cookie from 'js-cookie'
 
 

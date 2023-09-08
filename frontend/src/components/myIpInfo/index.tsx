@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectMyIp, selectMyIpInfo, getMyIpInfoAction,  } from "../../app/reducer/IpSlice";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { selectMyIp, selectMyIpInfo, getMyIpInfoAction,  } from "app/reducer/IpSlice";
 
 const MyIPInfo: FC = () => {
     const dispatch = useAppDispatch();

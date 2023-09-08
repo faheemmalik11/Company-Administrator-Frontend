@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Alert from 'components/Inventory/Alert';
+import Alert from 'UI/Alert';
 import { IaddCategory } from 'app/interfaces/inventory_addCategory';
 import { addInventoryCategory } from 'services/inventory_categories';
 
@@ -12,7 +12,7 @@ const InitialValues: IaddCategory = {
 
 const AddInventoryCategory = () => {
     const [isAlert, setIsAlert] = useState<boolean>(false);
-    const [showFinanceLink, setShowFinanceLink] = useState<boolean>(false);
+    const [showLink, setShowLink] = useState<boolean>(false);
     const [responseMessage, setResponseMessage] = useState<string>('');
 
     const validationSchema = Yup.object({
@@ -28,9 +28,8 @@ const AddInventoryCategory = () => {
             description
         });
         if (response.code === 200) {
-            console.log(response.data.message)
             setResponseMessage(response.data.message);
-            setShowFinanceLink(true)
+            setShowLink(true)
 
         }
         else {
@@ -48,8 +47,8 @@ const AddInventoryCategory = () => {
             {isAlert && <Alert
                 responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
-                showFinanceLink={showFinanceLink}
-                setShowFinanceLink={setShowFinanceLink}
+                showLink={showLink}
+                setShowLink={setShowLink}
                 linkValue={'categories'} />}
             <h1>Add Finance Data</h1>
             <Formik initialValues={InitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>

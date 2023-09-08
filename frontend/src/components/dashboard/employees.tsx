@@ -61,6 +61,9 @@ const Employees: React.FC<Props> = ({ update_id }) => {
             setIsStatusPopup(false)
         }
     }
+    const handleAddEmployee = () => {
+        navigate('/add_employee')
+    }
     const incrementHandler = (id: number) => {
         navigate(`/incrementHistory_employee/${id}`)
     }
@@ -79,6 +82,7 @@ const Employees: React.FC<Props> = ({ update_id }) => {
                     emp_id={employeeId}
                     setDeleteDependency={setDeleteDependency} />}
             </Modal>
+            <button onClick={handleAddEmployee}>Add new employee</button>
             <table className="border-2">
                 <thead className="border-2">
                     <tr>
@@ -86,6 +90,8 @@ const Employees: React.FC<Props> = ({ update_id }) => {
                         <th>Name</th>
                         <th>City</th>
                         <th>DOB</th>
+                        <th>Email</th>
+                        <th>Cnic</th>
                         <th>Status</th>
                         <th>Action </th>
                     </tr>
@@ -100,6 +106,8 @@ const Employees: React.FC<Props> = ({ update_id }) => {
                                     <td><Link title='update' to={`/update_employee/${employee.id}`}>{employee.name}</Link></td>
                                     <td>{employee.city}</td>
                                     <td>{employee.date_of_birth}</td>
+                                    <td>{employee.email}</td>
+                                    <td>{employee.cnic}</td>
                                     <td>{employee.status.name}</td>
                                     {/* <td><button title='update status' onClick={() => { statusHandler(employee.id) }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
