@@ -10,6 +10,7 @@ import Select from 'react-select';
 import Alert from 'UI/Alert';
 import { useLocation } from 'react-router-dom';
 import { uniqueCnic, uniqueEmail } from 'services/employees';
+import SideBAR from 'components/side_bar/Sidebar';
 const initialValues: IregisterCompanyEmployee = {
     roles_id: [],
     email: '',
@@ -219,6 +220,7 @@ const Add_Employee = () => {
 
     return (
         <React.Fragment>
+           
             {isAlert && <Alert responseMessage={responseMessage}
              setIsAlert={setIsAlert}
               showLink={showDashboardLink}
@@ -303,7 +305,7 @@ const Add_Employee = () => {
                                         // console.log(cnicFocused)}}
                                         // onBlur={() => {setCnicFocused(false)
                                         //     console.log(cnicFocused)}}
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
                                     />
                                 </div>
                             </div>

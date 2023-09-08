@@ -12,6 +12,7 @@ import Store from "components/Inventory/Stores";
 import Teams from "components/Teams";
 import Header from "components/header";
 import Footer from "components/footer";
+import SideBAR from "components/side_bar/Sidebar";
 
 
 const Dashboard = () => {
@@ -43,15 +44,25 @@ const Dashboard = () => {
     })
 
     return <React.Fragment>
+         
         <Header />
-        <SideBar
+        {/* <SideBar
             isEmployee={isEmployee} setIsEmployee={setIsEmployee}
             isFinance={isFinance} setIsFinance={setIsFinance}
             isFinanceCategories={isFinanceCategories} setIsFinanceCategories={setIsFinanceCategories}
             isItem={isItem} setIsItem={setIsItem}
             isCategory={isCategory} setIsCategory={setIsCategory}
             isStore={isStore} setIsStore={setIsStore}
-            isTeam={isTeam} setIsTeam={setIsTeam} />
+            isTeam={isTeam} setIsTeam={setIsTeam} /> */}
+
+        <SideBAR 
+        isEmployee={isEmployee} setIsEmployee={setIsEmployee}
+        isFinance={isFinance} setIsFinance={setIsFinance}
+        isFinanceCategories={isFinanceCategories} setIsFinanceCategories={setIsFinanceCategories}
+        isItem={isItem} setIsItem={setIsItem}
+        isCategory={isCategory} setIsCategory={setIsCategory}
+        isStore={isStore} setIsStore={setIsStore}
+        isTeam={isTeam} setIsTeam={setIsTeam}/>
 
 
         <h1>{welcomeMessege}</h1>

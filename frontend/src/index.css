@@ -58,7 +58,9 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+.LoginPageBg{
+  background-image: radial-gradient(circle at top right,#506fe46e,#fff 42%,#0000 0),radial-gradient(circle at bottom left,#506fe46e,#fff 42%,#0000 0);
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
