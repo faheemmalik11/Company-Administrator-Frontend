@@ -1,6 +1,6 @@
 import { IaddFinance } from 'app/interfaces/add_finance';
-import config from '../config/config'
-import axios from "../utils/axios";
+import config from 'config/config'
+import axios from "utils/axios";
 
 export const getAllFinanceData = async () => {
     try {
@@ -56,7 +56,7 @@ export const addFinanceData = async (body: IaddFinance) => {
             `${config.defaults.api_url}/company/finance/`, body
         );
 
-        console.log('data from finance: ', response);
+        console.log('data from add finance: ', response);
        // console.log('data ', data.finance);
       
         return response;

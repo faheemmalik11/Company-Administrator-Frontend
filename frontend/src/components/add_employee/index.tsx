@@ -7,7 +7,7 @@ import { IRoles } from 'app/interfaces/roles';
 import { registerCompanyEmployee } from 'services/employees';
 import { getCompanyRoles } from 'services/roles';
 import Select from 'react-select';
-import Alert from './Alert';
+import Alert from 'UI/Alert';
 import { useLocation } from 'react-router-dom';
 import { uniqueCnic, uniqueEmail } from 'services/employees';
 const initialValues: IregisterCompanyEmployee = {
@@ -219,7 +219,11 @@ const Add_Employee = () => {
 
     return (
         <React.Fragment>
-            {isAlert && <Alert responseMessage={responseMessage} setIsAlert={setIsAlert} showDashboardLink={showDashboardLink} setShowDashboardLink={setShowDashboardLink} />}
+            {isAlert && <Alert responseMessage={responseMessage}
+             setIsAlert={setIsAlert}
+              showLink={showDashboardLink}
+               setShowLink={setShowDashboardLink}
+               linkValue='dashboard' />}
 
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ errors, status, touched, resetForm }) => {

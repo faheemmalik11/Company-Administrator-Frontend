@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Alert from 'components/Inventory/Alert';
+import Alert from 'UI/Alert';
 import Select from 'react-select';
 import { getAllCategories } from 'services/inventory_categories';
 import { IaddStore } from 'app/interfaces/inventory_addStore';
 import { addInventoryStore } from 'services/inventory_stores';
 
-const financeInitialValues: IaddStore = {
+const InitialValues: IaddStore = {
     name: '',
     unique_identifier: '',
     description: '',
@@ -21,17 +21,16 @@ interface CategoryOption {
 const AddInventoryStore = () => {
     const [CategoryOption, setCategoryOption] = useState<CategoryOption[]>([])
     const [isAlert, setIsAlert] = useState<boolean>(false);
-    const [showFinanceLink, setShowFinanceLink] = useState<boolean>(false);
+    const [showLink, setShowLink] = useState<boolean>(false);
     const [responseMessage, setResponseMessage] = useState<string>('');
     const [select_errorMessage, setSelect_ErrorMessage] = useState<string>('');
-    //const [select_isTouched, setSelect_IsTouched] = useState<boolean>(false);
+    const [select_isTouched, setSelect_IsTouched] = useState<boolean>(false);
     const [selectedOptions, setSelectedOptions] = useState<CategoryOption[]>([]);
-    const [categoriesId, setCategoriesId] = useState<number[] | null>([]);
+    const [categoriesId, setCategoriesId] = useState<number[]>([]);
 
     useEffect(() => {
         const getCategory = async () => {
             const response = await getAllCategories();
-            console.log('response', response)
             const category: CategoryOption[] = [];
             for (let i = 0; i < response.length; i++) {
                 category.push({
@@ -62,9 +61,8 @@ const AddInventoryStore = () => {
             categories_id
         });
         if (response.code === 200) {
-            console.log(response.data.message)
             setResponseMessage(response.data.message);
-            setShowFinanceLink(true)
+            setShowLink(true)
 
         }
         else {
@@ -75,14 +73,15 @@ const AddInventoryStore = () => {
         // }
         setIsAlert(true);
         resetForm();
+        setSelectedOptions([]);
     };
-    // const validateSelection = () => {
-    //     if (selectedOptions.value === 0) {
-    //         setSelect_ErrorMessage('Please select an option.');
-    //     } else {
-    //         setSelect_ErrorMessage('');
-    //     }
-    // };
+    const validateSelection = () => {
+        if (categoriesId.length === 0) {
+            setSelect_ErrorMessage('Please select an option.');
+        } else {
+            setSelect_ErrorMessage('');
+        }
+    };
 
     const handleSelect = (e: any) => {
         //let category: CategoryOption = { label: '', value: null };
@@ -104,39 +103,39 @@ const AddInventoryStore = () => {
         }
         setSelectedOptions(categories)
         setCategoriesId(catId);
-       // console.log(rolesDataId);
-        // if (select_isTouched) {
-        //     validateSelection(rolesDataId);
-        // }
+       //console.log(rolesDataId);
+        if (select_isTouched) {
+            validateSelection();
+        }
     };
 
-    // const handleBlur = () => {
-    //     setSelect_IsTouched(true);
-    //     validateSelection();
-    // };
+    const handleBlur = () => {
+        setSelect_IsTouched(true);
+        validateSelection();
+    };
     return (
         <React.Fragment>
             {isAlert && <Alert
                 responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
-                showFinanceLink={showFinanceLink}
-                setShowFinanceLink={setShowFinanceLink} 
-                linkValue='add_Store'/>}
+                showLink={showLink}
+                setShowLink={setShowLink} 
+                linkValue='Stores'/>}
             <h1>Add Store Data</h1>
-            <Formik initialValues={financeInitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+            <Formik initialValues={InitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ errors, status, touched, resetForm }) => {
                     return (
                         <Form className="login__card-form">
                             <br />
                             <div>Select category
                                 <Select
-                                    //required
-                                    //value={selectedOptions}
+                                    required
+                                    value={selectedOptions}
                                     isMulti
                                     name='finance_category_id'
                                     options={CategoryOption}
                                     onChange={handleSelect}
-                                    //onBlur={handleBlur}
+                                    onBlur={handleBlur}
                                     className="basic-multi-select"
                                     classNamePrefix="select" />
                                 {select_errorMessage && <p style={{ color: 'red' }}>{select_errorMessage}</p>}
@@ -187,7 +186,12 @@ const AddInventoryStore = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} >
+                                <button className="btn login__card-btn" type="submit" disabled={false} onClick={() => {
+                                    if (categoriesId.length === 0) {
+                                        setSelect_ErrorMessage('Please select an option.');
+                                    } else {
+                                        setSelect_ErrorMessage('');
+                                    }}}>
                                     Submit
                                 </button>
                             </div>

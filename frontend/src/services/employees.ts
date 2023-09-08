@@ -1,5 +1,5 @@
-import config from '../config/config'
-import axios from "../utils/axios";
+import config from 'config/config'
+import axios from "utils/axios";
 import { IupdateCompanyEmployee } from 'app/interfaces/updateCompanyEmployee';
 import { IregisterCompanyEmployee } from 'app/interfaces/registerCompanyEmployee';
 

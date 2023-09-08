@@ -4,6 +4,15 @@ import Employees from "./employees";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import SideBar from "components/side_bar";
+import Finance from "components/finance";
+import FinanceCategories from "components/finance_categories";
+import Items from "components/Inventory/Items";
+import Categories from "components/Inventory/Categories";
+import Store from "components/Inventory/Stores";
+import Teams from "components/Teams";
+import Header from "components/header";
+import Footer from "components/footer";
+
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -12,7 +21,14 @@ const Dashboard = () => {
     const [welcomeMessege, setWelcomeMessege] = useState<string>('');
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [updateId, setUpdateId] = useState<number>();
-    console.log(navigate)
+    const [isEmployee, setIsEmployee] = useState<boolean>(true);
+    const [isFinance, setIsFinance] = useState<boolean>(false);
+    const [isFinanceCategories, setIsFinanceCategories] = useState<boolean>(false);
+    const [isItem, setIsItem] = useState<boolean>(false);
+    const [isCategory, setIsCategory] = useState<boolean>(false);
+    const [isStore, setIsStore] = useState<boolean>(false);
+    const [isTeam, setIsTeam] = useState<boolean>(false);
+
     useEffect(() => {
         if (user.roles.includes('all')) {
             setWelcomeMessege('Welcome super admin')
@@ -25,18 +41,32 @@ const Dashboard = () => {
             setUpdateId(location.state.id);
         }
     })
-    const handleAddEmployee = () => {
-        navigate('/add_employee')
-    }
+
     return <React.Fragment>
-        <SideBar />
-       
-        
+        <Header />
+        <SideBar
+            isEmployee={isEmployee} setIsEmployee={setIsEmployee}
+            isFinance={isFinance} setIsFinance={setIsFinance}
+            isFinanceCategories={isFinanceCategories} setIsFinanceCategories={setIsFinanceCategories}
+            isItem={isItem} setIsItem={setIsItem}
+            isCategory={isCategory} setIsCategory={setIsCategory}
+            isStore={isStore} setIsStore={setIsStore}
+            isTeam={isTeam} setIsTeam={setIsTeam} />
+
+
         <h1>{welcomeMessege}</h1>
-        {isAdmin && <button onClick={handleAddEmployee}>Add new employee</button>}
-        {/* <h2>{location.state.id}</h2> */}
-        {isAdmin && <Employees update_id={updateId} />}
-    
+        {isAdmin && 
+        <>
+            {isEmployee && <Employees update_id={updateId} />}
+            {isFinance && <Finance />}
+            {isFinanceCategories && <FinanceCategories />}
+            {isStore && <Store />}
+            {isCategory && <Categories />}
+            {isItem && <Items />}
+            {isTeam && <Teams />}
+        </>}
+
+        <Footer />
     </React.Fragment>
 }
 

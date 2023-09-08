@@ -5,17 +5,23 @@ import DeletePopup from "./deletePopup";
 import Modal from "UI/Modal";
 import { getAllStores } from "services/inventory_stores";
 import { IStores } from "app/interfaces/inventory_stores";
-const StoreTable = () => {
+
+interface Props {
+    update_id: number | undefined,
+}
+
+const StoreTable: React.FC<Props> = ({update_id}) => {
     const navigate = useNavigate();
     const [storeData, setStoreData] = useState<IStores[]>([]);
     const [isDeletePopup, setIsDeletePopup] = useState<boolean>(false);
     const [finance_id, setFinance_id] = useState<number>();
     const [deleteDependency, setDeleteDependency] = useState<boolean>(false);
+    const [isHighlighted, setIsHighlighted] = useState<boolean>(false);
+    const [highlightedId, setHighlightedId] = useState<number>();
     useEffect(() => {
         const getStores = async () => {
             setDeleteDependency(false);
             const response = await getAllStores();
-            console.log('response', response);
 
             for (let i = 0; i < response.length; i++) {
                 if (response[i].updated_at) {
@@ -37,13 +43,23 @@ const StoreTable = () => {
         getStores()
     }, [deleteDependency]);
 
+    useEffect(() => {
+        setHighlightedId(update_id)
+        setIsHighlighted(true)
+        setTimeout(() => {
+            setIsHighlighted(false);
+            setHighlightedId(0)
+        }, 3000);
+    }, [update_id])
+
+
     const deleteHandler = (id: number | undefined) => {
         setFinance_id(id);
         setIsDeletePopup(true)
     }
 
     const updateHandler = (id: number | undefined) => {
-        navigate(`/update_financeCategories/${id}`)
+        navigate(`/update_Store/${id}`)
     }
 
     return(
@@ -72,7 +88,7 @@ const StoreTable = () => {
                     {
                         storeData.map(store => {
                             return (
-                                <tr  key={store.id}>
+                                <tr className={((highlightedId == store.id) && isHighlighted) ? `bg-sky-500/100 border-2 border-green-600 ` : 'border-2'} key={store.id}>
                                     <td className="border-2">{store.id}</td>
                                     <td className="border-2">{store.company_id}</td>
                                     <td className="border-2">{store.name}</td>

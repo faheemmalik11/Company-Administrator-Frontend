@@ -5,7 +5,7 @@ import { getSingleIncrementHistory, updateIncrementHistory } from "services/incr
 import { useLocation } from 'react-router-dom';
 import { IincrementHistory } from "app/interfaces/incrementHistory";
 import { useNavigate } from "react-router";
-import Alert from "./updateAlert";
+import Alert from "UI/updateAlert";
 
 const InitialData: IincrementHistory = {
     created_at: '',
@@ -27,7 +27,6 @@ const UpdateHistory = () => {
     useEffect(() => {
         const getHistory = async () => {
             const response = await getSingleIncrementHistory({ emp_id: location.state.Emp_id, id: inc_id });
-            console.log('response in main', response);
 
             if (response.increment_effective_date) {
                 const dateObject = new Date(response.increment_effective_date);
@@ -41,7 +40,6 @@ const UpdateHistory = () => {
         }
         getHistory()
     }, [])
-    console.log('increment data', incrementData)
 
     const onSubmit = async (values: IincrementHistory) => {
 

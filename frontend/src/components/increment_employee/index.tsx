@@ -21,7 +21,6 @@ const IncrementHistory = () => {
             setDeleteDependency(false);
 
             const response = await getIncrementHistoryById(Id);
-            console.log('response', response);
 
             for (let i = 0; i < response.length; i++) {
                 if (response[i].updated_at) {
@@ -43,7 +42,6 @@ const IncrementHistory = () => {
         getHistory()
 
     }, [deleteDependency])
-    console.log('increment data', incrementData)
     const deleteIncrementHandler = (id: number, emp_id: number) => {
         setIncrementId(id);
         setEmployee_id(emp_id)

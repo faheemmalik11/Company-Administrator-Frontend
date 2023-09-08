@@ -1,10 +1,10 @@
 import IRoute from "app/interfaces/route";
-import HomePage from "../pages/Home";
+import HomePage from "pages/Home";
 // import MyIpPage from "../pages/MyIp"
-import DashboardPage from "../pages/Dashboard";
-import LoginPage from "../pages/login";
-import Add_EmployeePage from "../pages/Add_Employee";
-import Update_EmployeePage from "../pages/Update_Employee";
+import DashboardPage from "pages/Dashboard";
+import LoginPage from "pages/login";
+import Add_EmployeePage from "pages/Add_Employee";
+import Update_EmployeePage from "pages/Update_Employee";
 import IncrementHistoryPage from "pages/IncrementHistory_Employee";
 import CompanyLoginPage from "pages/loginCompany";
 import UpdateIncrementHistoryPage from "pages/Update_incrementHistory";
@@ -15,13 +15,20 @@ import CategoriesPage from "pages/Category_Inventory";
 import ItemsPage from "pages/Items_Inventory";
 import StorePage from "pages/Stores_Inventory";
 import FinanceCategoriesPage from "pages/FinanceCategories";
-import AddFinanceCategory from "components/finance_categories/addFinanceCategory";
 import Add_FinanceCategoryPage from "pages/Add_FinanceCategory";
 import Update_FinanceCategoryPage from "pages/Update_FinanceCategory";
 import Add_InventoryStorePage from "pages/AddStore_inventory";
 import Add_InventoryCategoryPage from "pages/AddCategory_inventory";
 import Add_InventoryItemPage from "pages/AddItem_inventory";
 import UpdateInventoryCategoryPage from "pages/UpdateCategory_inventory";
+import UpdateInventoryStorePage from "pages/UpdateStore_inventory";
+import UpdateInventoryItemPage from "pages/UpdateItem_inventory";
+import TeamPage from "pages/Team";
+import TeamMembersPage from "pages/TeamMembers";
+import Add_TeamPage from "pages/Add_Team";
+import UpdateTeamPage from "pages/Update_Team";
+import Update_CompanySettingPage from "pages/Update_CompanySetting";
+import ResetPasswordPage from "pages/ResetPassword";
 
 const routes: IRoute[] = [
     {
@@ -139,7 +146,48 @@ const routes: IRoute[] = [
         path: '/update_Category/:cat_id',
         name: 'Update_Category',
         component: UpdateInventoryCategoryPage
+    },
+    {
+        path: '/update_Store/:store_id',
+        name: 'Update_Store',
+        component: UpdateInventoryStorePage
+    },
+    {
+        path: '/update_Item/:item_id',
+        name: 'Update_Item',
+        component: UpdateInventoryItemPage
+    },
+    {
+        path: '/team',
+        name: 'Team',
+        component: TeamPage
+    },
+    {
+        path: '/team_members/:team_id',
+        name: 'TeamMembers',
+        component: TeamMembersPage
+    },
+    {
+        path: '/add_team',
+        name: 'Add_Team',
+        component: Add_TeamPage
+    },
+    {
+        path: '/update_team/:team_id',
+        name: 'Update_Team',
+        component: UpdateTeamPage
+    },
+    {
+        path: '/update_setting',
+        name: 'Update_Setting',
+        component: Update_CompanySettingPage
+    },
+    {
+        path: '/reset_password',
+        name: 'Reset_Password',
+        component: ResetPasswordPage
     }
+
     // {
     //     path: '/my-ip',
     //     name: 'My IP',

@@ -5,17 +5,24 @@ import DeletePopup from "./deletePopup";
 import Modal from "UI/Modal";
 import { Iitems } from "app/interfaces/inventory_items";
 import { getAllItems } from "services/inventory_items";
-const ItemTable = () => {
+
+interface Props {
+    update_id: number | undefined,
+}
+
+const ItemTable: React.FC<Props> = ({ update_id }) => {
     const navigate = useNavigate();
     const [itemData, setItemData] = useState<Iitems[]>([]);
     const [isDeletePopup, setIsDeletePopup] = useState<boolean>(false);
     const [finance_id, setFinance_id] = useState<number>();
     const [deleteDependency, setDeleteDependency] = useState<boolean>(false);
+    const [isHighlighted, setIsHighlighted] = useState<boolean>(false);
+    const [highlightedId, setHighlightedId] = useState<number>();
+
     useEffect(() => {
         const getItems = async () => {
             setDeleteDependency(false);
             const response = await getAllItems();
-            console.log('response', response);
 
             for (let i = 0; i < response.length; i++) {
                 if (response[i].updated_at) {
@@ -37,13 +44,22 @@ const ItemTable = () => {
         getItems()
     }, [deleteDependency]);
 
+    useEffect(() => {
+        setHighlightedId(update_id)
+        setIsHighlighted(true)
+        setTimeout(() => {
+            setIsHighlighted(false);
+            setHighlightedId(0)
+        }, 3000);
+    }, [update_id])
+
     const deleteHandler = (id: number | undefined) => {
         setFinance_id(id);
         setIsDeletePopup(true)
     }
 
     const updateHandler = (id: number | undefined) => {
-        navigate(`/update_financeCategories/${id}`)
+        navigate(`/update_Item/${id}`)
     }
 
     return(
@@ -59,11 +75,12 @@ const ItemTable = () => {
                 <thead className="border-2">
                     <tr className="border-2">
                         <th>Id</th>
-                        <th>Company Id</th>
                         <th>Name</th>
-                        <th>Created at</th>
-                        <th>Unique Identifier</th>
                         <th>Description</th>
+                        <th>Created at</th>
+                        <th>Quantity</th>
+                        <th>Store Id</th>
+                        <th>Category Id</th>
                         <th>Updated at</th>
                         <th>Action</th>
                     </tr>
@@ -72,7 +89,7 @@ const ItemTable = () => {
                     {
                         itemData.map(item => {
                             return (
-                                <tr  key={item.id}>
+                                <tr className={((highlightedId == item.id) && isHighlighted) ? `bg-sky-500/100 border-2 border-green-600 ` : 'border-2'} key={item.id}>
                                     <td className="border-2">{item.id}</td>
                                     <td className="border-2">{item.name}</td>
                                     <td className="border-2">{item.description}</td>

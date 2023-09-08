@@ -1,5 +1,5 @@
-import config from '../config/config'
-import axios from "../utils/axios";
+import config from 'config/config'
+import axios from "utils/axios";
 import IStatus from 'app/interfaces/status';
 export const getCompanyStatus = async () => {
     try {

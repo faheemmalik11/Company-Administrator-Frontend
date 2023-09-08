@@ -14,11 +14,14 @@ const Categories = () => {
         }
     })
     const handleAddStore = () => {
+        if(location.state !== null){
+            location.state=null;
+        }
         navigate('/add_Category')
     }
     return(
         <React.Fragment>
-            <SideBar />
+            {/* <SideBar /> */}
             <h1>Categories Section</h1>
             <button onClick={handleAddStore}>Add new Store</button>
             <CategoryTable update_id={updateId}/>

@@ -4,7 +4,7 @@ import { IaddFinance } from 'app/interfaces/add_finance';
 import * as Yup from 'yup';
 import { addFinanceData, getAllFinanceCategories } from 'services/finance';
 import Select from 'react-select';
-import Alert from './Alert';
+import Alert from 'UI/Alert';
 
 const financeInitialValues: IaddFinance = {
     finance_category_id: '',
@@ -73,6 +73,7 @@ const AddFinance = () => {
         // }
         setIsAlert(true);
         resetForm();
+        setSelectedOptions({ label: '', value: 0 });
     };
     const validateSelection = () => {
         if (selectedOptions.value === 0) {
@@ -101,8 +102,9 @@ const AddFinance = () => {
             {isAlert && <Alert
                 responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
-                showFinanceLink={showFinanceLink}
-                setShowFinanceLink={setShowFinanceLink} />}
+                showLink={showFinanceLink}
+                setShowLink={setShowFinanceLink}
+                linkValue='finance' />}
             <h1>Add Finance Data</h1>
             <Formik initialValues={financeInitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ errors, status, touched, resetForm }) => {
