@@ -1,9 +1,9 @@
 export interface ITeam {
-    id: number | undefined;
-    name: string | null;
-    description: string | null;
-    team_lead_id: number | null;
-    company_id: number | null;
-    created_at: string | null;
-    updated_at: string | null;
+    id: number
+    name: string 
+    description: string ;
+    team_lead_id: number ;
+    company_id: number ;
+    created_at: string;
+    updated_at: string;
 }
