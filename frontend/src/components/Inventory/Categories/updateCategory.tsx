@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import Alert from "components/Inventory/updateAlert";
+import Alert from "UI/updateAlert";
 import { IaddCategory } from "app/interfaces/inventory_addCategory";
 import { getInventoryCategorybyId, updateInventoryCategory } from "services/inventory_categories";
 
@@ -21,7 +21,6 @@ const UpdateInventoryCategory = () => {
     useEffect(() => {
         const getFinance = async () => {
             const response = await getInventoryCategorybyId(cat_id)
-            console.log('response', response);
             setCategoryData(response)  
         }
         getFinance()
@@ -42,7 +41,6 @@ const UpdateInventoryCategory = () => {
             description
         }, cat_id);
         if (response.code === 200) {
-            console.log(response.data.message)
             setResponseMessage(response.data.message);
             navigate('/categories',{state:{cat_id: cat_id}});
         }

@@ -1,5 +1,5 @@
-import config from '../config/config'
-import axios from "../utils/axios";
+import config from 'config/config'
+import axios from "utils/axios";
 
 export const getCompanyRoles = async () => {
     try {

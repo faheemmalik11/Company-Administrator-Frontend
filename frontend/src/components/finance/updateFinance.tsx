@@ -6,7 +6,7 @@ import { IaddFinance } from "app/interfaces/add_finance";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Select from "react-select"
 import * as Yup from 'yup';
-import Alert from "./updateAlert";
+import Alert from "UI/updateAlert";
 interface CategoryOption {
     label: string,
     value: number

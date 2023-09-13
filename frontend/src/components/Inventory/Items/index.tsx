@@ -1,19 +1,31 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import SideBar from "components/side_bar";
 import ItemTable from "./itemsTable";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Items = () => {
-    const navigate = useNavigate()
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [updateId, setUpdateId] = useState<number>();
+
+    useEffect(() => {
+        if (location.state !== null) {
+            setUpdateId(location.state.item_id);
+        }
+    })
+
     const handleAddStore = () => {
+        if(location.state !== null){
+            location.state=null;
+        }
         navigate('/add_Item')
     }
     return(
         <React.Fragment>
-            <SideBar />
+            {/* <SideBar /> */}
             <h1>Items Section</h1>
             <button onClick={handleAddStore}>Add new Store</button>
-            <ItemTable />
+            <ItemTable update_id={updateId}/>
         </React.Fragment>
     )
 }

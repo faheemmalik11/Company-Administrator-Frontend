@@ -11,6 +11,10 @@
 // }
 
 module.exports = {
+  theme: {extend:{height: {
+    18: '1.125rem',
+    sideBarContentHeight: 'calc(100% - 64px)',
+},}},
   content: ['./dist/**/*.html', './src/**/*.{js,jsx,ts,tsx}', './*.html'],
   // plugins: [require('@tailwindcss/forms')],
   variants: {

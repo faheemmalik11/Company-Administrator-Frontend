@@ -1,6 +1,6 @@
 import { createSlice} from '@reduxjs/toolkit'
 import { AppDispatch, AppState } from "../store";
-import { getMyIp, getMyIpInfo } from '../services/IpService';
+import { getMyIp, getMyIpInfo } from 'services/IpService';
 
 interface InitialState {
     myIp: string;

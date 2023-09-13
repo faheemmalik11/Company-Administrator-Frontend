@@ -3,7 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { IaddFinanceCategory } from 'app/interfaces/add_financeCategories';
 import { addFinanceCategory } from 'services/finance_categories';
-import Alert from './Alert';
+import Alert from 'UI/Alert';
 
 const financeInitialValues: IaddFinanceCategory = {
     name: '',
@@ -52,8 +52,9 @@ const AddFinanceCategory = () => {
             {isAlert && <Alert
                 responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
-                showFinanceLink={showFinanceLink}
-                setShowFinanceLink={setShowFinanceLink} />}
+                showLink={showFinanceLink}
+                setShowLink={setShowFinanceLink}
+                linkValue='finance_categories' />}
             <h1>Add Finance Data</h1>
             <Formik initialValues={financeInitialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                 {({ errors, status, touched, resetForm }) => {

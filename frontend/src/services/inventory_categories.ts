@@ -1,6 +1,6 @@
 import { IaddCategory } from 'app/interfaces/inventory_addCategory';
-import config from '../config/config'
-import axios from "../utils/axios";
+import config from 'config/config'
+import axios from "utils/axios";
 
 export const getAllCategories = async () => {
     try {

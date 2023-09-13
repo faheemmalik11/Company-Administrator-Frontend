@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { IaddFinanceCategory } from "app/interfaces/add_financeCategories";
 import { getFinanceCategorybyId, updateFinanceCategory } from "services/finance_categories";
-import Alert from "./updateAlert";
+import Alert from "UI/updateAlert";
 
 const finance: IaddFinanceCategory = {
     name: '',

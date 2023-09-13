@@ -1,5 +1,5 @@
-import config from '../config/config'
-import axios from "../utils/axios";
+import config from 'config/config'
+import axios from "utils/axios";
 import cookie from 'js-cookie'
 
 interface ILogin {
