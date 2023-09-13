@@ -44,7 +44,7 @@ const Dashboard = () => {
     })
 
     return <React.Fragment>
-         
+
         <Header />
         {/* <SideBar
             isEmployee={isEmployee} setIsEmployee={setIsEmployee}
@@ -55,27 +55,27 @@ const Dashboard = () => {
             isStore={isStore} setIsStore={setIsStore}
             isTeam={isTeam} setIsTeam={setIsTeam} /> */}
 
-        <SideBAR 
-        isEmployee={isEmployee} setIsEmployee={setIsEmployee}
-        isFinance={isFinance} setIsFinance={setIsFinance}
-        isFinanceCategories={isFinanceCategories} setIsFinanceCategories={setIsFinanceCategories}
-        isItem={isItem} setIsItem={setIsItem}
-        isCategory={isCategory} setIsCategory={setIsCategory}
-        isStore={isStore} setIsStore={setIsStore}
-        isTeam={isTeam} setIsTeam={setIsTeam}/>
+        <SideBAR
+            isEmployee={isEmployee} setIsEmployee={setIsEmployee}
+            isFinance={isFinance} setIsFinance={setIsFinance}
+            isFinanceCategories={isFinanceCategories} setIsFinanceCategories={setIsFinanceCategories}
+            isItem={isItem} setIsItem={setIsItem}
+            isCategory={isCategory} setIsCategory={setIsCategory}
+            isStore={isStore} setIsStore={setIsStore}
+            isTeam={isTeam} setIsTeam={setIsTeam} />
 
 
         <h1>{welcomeMessege}</h1>
-        {isAdmin && 
-        <>
-            {isEmployee && <Employees update_id={updateId} />}
-            {isFinance && <Finance />}
-            {isFinanceCategories && <FinanceCategories />}
-            {isStore && <Store />}
-            {isCategory && <Categories />}
-            {isItem && <Items />}
-            {isTeam && <Teams />}
-        </>}
+        {isAdmin &&
+            <>
+                {isEmployee && <Employees update_id={updateId} />}
+                {isFinance && <Finance />}
+                {isFinanceCategories && <FinanceCategories />}
+                {isStore && <Store />}
+                {isCategory && <Categories />}
+                {isItem && <Items />}
+                {isTeam && <Teams />}
+            </>}
 
         <Footer />
     </React.Fragment>

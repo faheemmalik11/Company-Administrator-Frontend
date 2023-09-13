@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import celestialImage from 'assets/celestials-logo-300x97-1.png';
+import SidebarItems from './sideBarItems';
+import SidebarDropdown from './sideBarDropdown';
+import BoxImage from 'assets/box.svg';
+import Activity from 'assets/activity.svg';
+import Cloud from 'assets/cloud.svg';
+import Filter from 'assets/filter.svg';
+import Target from 'assets/target.svg';
+import Mail from 'assets/mail.svg';
+
 interface Props {
     setIsEmployee: (val: boolean) => void;
     setIsFinance: (val: boolean) => void;
@@ -34,9 +43,10 @@ const SideBAR: React.FC<Props> = ({
     isTeam,
 }) => {
     const [sideBarHover, setSideBarHover] = useState(false);
-    const [isSideBarActive, setIsSideBarActive] = useState(false);
+    const [isSideBarActive, setIsSideBarActive] = useState(true);
     const [sideBarHoverFinance, setSideBarHoverFinance] = useState(false);
-    const [isSideBarActiveFinance, setIsSideBarActiveFinance] = useState(false);
+    const [isSideBarActiveFinance, setIsSideBarActiveFinance] = useState(true);
+
     const toggleDropdown = () => {
         if (isSideBarActive) {
             setIsSideBarActive(false);
@@ -44,15 +54,13 @@ const SideBAR: React.FC<Props> = ({
         else {
             setIsSideBarActive(true);
         }
-       
+
         if (isSideBarActive) {
             setSideBarHover(true)
         }
         else {
             setSideBarHover(false)
         }
-
-        //   }
     };
     const toggleFinanceDropdown = () => {
         if (isSideBarActiveFinance) {
@@ -61,7 +69,7 @@ const SideBAR: React.FC<Props> = ({
         else {
             setIsSideBarActiveFinance(true);
         }
-       
+
         if (isSideBarActiveFinance) {
             setSideBarHoverFinance(true)
         }
@@ -69,7 +77,6 @@ const SideBAR: React.FC<Props> = ({
             setSideBarHoverFinance(false)
         }
 
-        //   }
     };
     const employeeHandler = () => {
         setIsEmployee(true);
@@ -172,7 +179,7 @@ const SideBAR: React.FC<Props> = ({
                 <div
                     id="sidebar-mob"
                     className={`h-screen sm:block sm:ml-0  sideBarBackground lg:w-64 sm:w-16 w-54 overflow-auto sidebarscreen:left-0 
-                         boxshadow-gray-100  font-inter fixed scrollbar-hide top-0 z-10 dark:border-r dark:border-white bg-[url('assets/sideBarBg.png')] bg-fixed `}>
+                         boxshadow-gray-100  font-inter fixed scrollbar-hide top-0 z-10 dark:border-r dark:border-white bg-sky-400 bg-fixed `}>
                     <div className="px-5 py-3 ">
                         <div className="w-40 pl-0.5">
                             <img
@@ -189,352 +196,43 @@ const SideBAR: React.FC<Props> = ({
                             // /> */}
                     </div>
 
-                    <div className="bg-red-600 flex flex-col justify-between h-sideBarContentHeight px-2 pb-6">
+                    <div className="bg-sky-400 flex flex-col justify-between h-sideBarContentHeight px-2 pb-6">
                         <div>
-                            <button
-                                //  to={''}
-                                // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                className='bg-gray-500'
-                                onClick={employeeHandler}>
-                                <div
-                                    className={`${isEmployee ? 'bg-primaryHover ' : ''
-                                        } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
-                                    <div className="flex items-center">
-                                        <span>
-                                            <img
-                                                className={
-                                                    'brightness-0 invert  w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100'
-                                                }
-                                                src={''}
-                                                alt="Box"
-                                            />
-                                        </span>
-                                        <span
-                                            className={`${isEmployee ? 'text-white ' : ' text-foreground dark:text-white '
-                                                } lg:block
-                                                 text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
-                                            {'Employee'}
-                                        </span>
-                                    </div>
-                                </div>
-                            </button>
-                            <button
-                                //  to={''}
-                                // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                className='bg-gray-500'
-                                onClick={teamHandler}>
-                                <div
-                                    className={`${isEmployee ? 'bg-primaryHover ' : ''
-                                        } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
-                                    <div className="flex items-center">
-                                        <span>
-                                            <img
-                                                className={
-                                                    'brightness-0 invert  w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100'
-                                                }
-                                                src={''}
-                                                alt="Box"
-                                            />
-                                        </span>
-                                        <span
-                                            className={`${isTeam ? 'text-white ' : ' text-foreground dark:text-white '
-                                                } lg:block
-                                                 text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
-                                            {'Team'}
-                                        </span>
-                                    </div>
-                                </div>
-                            </button>
 
-                 {/*-------------------------------- Inventory Section ---------------------------------------*/}
+                            <SidebarItems isSidebarItem={isEmployee}
+                                sidebarItemHandler={employeeHandler}
+                                itemName='Employee'
+                                src={BoxImage} />
 
-                            <div className='relative' >
-                                <button
-                                    className="2xl:mt-3 mt-1 w-full flex justify-between items-center relative z-[9999]"
-                                >
-                                    <div
-                                        onClick={() => toggleDropdown()}
-                                        // onMouseEnter={() => { toggleDropdown() }}
-                                        className={`w-full flex justify-between items-center rounded 2xl:py-2.5 py-1.5 pl-6 pr-2.5 group hover:bg-primaryHover dark:hover:bg-white group cursor-pointer`}
-                                    >
-                                        <div className="flex items-center " >
-                                            <span>
-                                                <img
-                                                    className={`brightness-0 invert w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-1 dark:group-hover:brightness-100`}
-                                                    src={''}
-                                                    alt="Box"
-                                                />
-                                            </span>
-                                            <span
-                                                className={`text-foreground dark:text-white lg:block sm:hidden 
-                   text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-black-400 pl-3 sidebar-links group-hover:text-white`}
-                                            >
-                                                {'Inventory Section'}
-                                            </span>
-                                        </div>
+                            <SidebarItems isSidebarItem={isTeam}
+                                sidebarItemHandler={teamHandler}
+                                itemName='Team'
+                                src={Activity} />
 
-                                        <p>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className={`lg:block sm:hidden
-                   w-4 h-4 text-foreground dark:group-hover:brightness-0 indent-1`}
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                                                />
-                                            </svg>
-                                        </p>
-
-                                    </div>
-                                </button>
+                            {/*-------------------------------- Inventory Section ---------------------------------------*/}
+                            <SidebarDropdown
+                                toggleHandler={toggleDropdown}
+                                src={Cloud}
+                                isHover={sideBarHover}
+                                itemName='Inventory Section'
+                                dropDownItems={[{ key:1, isItem: isItem, itemHandler: itemHandler, itemName: 'Item',src:Mail },
+                                {key:2, isItem: isStore, itemHandler: storeHandler, itemName: 'Store',src:Target },
+                                {key:3,  isItem: isCategory, itemHandler: categoryHandler, itemName: 'Category', src:Cloud }]} />
 
 
-                                <div className='sideBarOpen'>
-                                    {sideBarHover &&
-                                        <ul>
-                                            <li>
-                                                <button
-                                                    //  to={''}
-                                                    // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                                    className='bg-gray-500'
-                                                    onClick={itemHandler}>
-                                                    <div
-                                                        className={`${isItem ? 'bg-primaryHover ' : ''
-                                                            } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
-                                                        <div className="flex items-center">
-                                                            <span>
-                                                                <img
-                                                                    className={
-                                                                        'brightness-0 invert  w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100'
-                                                                    }
-                                                                    src={''}
-                                                                    alt="Box"
-                                                                />
-                                                            </span>
-                                                            <span
-                                                                className={`${isItem ? 'text-white ' : ' text-foreground dark:text-white '
-                                                                    } lg:block
-                                                 text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
-                                                                {'Team'}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    //  to={''}
-                                                    // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                                    className='bg-gray-500'
-                                                    onClick={storeHandler}>
-                                                    <div
-                                                        className={`${isStore ? 'bg-primaryHover ' : ''
-                                                            } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
-                                                        <div className="flex items-center">
-                                                            <span>
-                                                                <img
-                                                                    className={
-                                                                        'brightness-0 invert  w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100'
-                                                                    }
-                                                                    src={''}
-                                                                    alt="Box"
-                                                                />
-                                                            </span>
-                                                            <span
-                                                                className={`${isStore ? 'text-white ' : ' text-foreground dark:text-white '
-                                                                    } lg:block
-                                                 text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
-                                                                {'Store'}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    //  to={''}
-                                                    // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                                    className='bg-gray-500'
-                                                    onClick={categoryHandler}>
-                                                    <div
-                                                        className={`${isCategory ? 'bg-primaryHover ' : ''
-                                                            } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
-                                                        <div className="flex items-center">
-                                                            <span>
-                                                                <img
-                                                                    className={
-                                                                        'brightness-0 invert  w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100'
-                                                                    }
-                                                                    src={''}
-                                                                    alt="Box"
-                                                                />
-                                                            </span>
-                                                            <span
-                                                                className={`${isCategory ? 'text-white ' : ' text-foreground dark:text-white '
-                                                                    } lg:block
-                                                 text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
-                                                                {'Category'}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            </li>
-                                        </ul>}
+                            {/*------------------------------- Finance Section -------------------------------*/}
+                            <SidebarDropdown
+                                toggleHandler={toggleFinanceDropdown}
+                                src={Filter}
+                                isHover={sideBarHoverFinance}
+                                itemName='Finance Section'
+                                dropDownItems={[{key:1 , isItem: isFinance, itemHandler: financeHandler, itemName: 'Finance',src:Filter },
+                                {key:2, isItem: isFinanceCategories, itemHandler: financeCategoryHandler, itemName: 'Finance Categories',src:Mail }
+                                ]} />
 
 
 
 
-
-
-                                    
-                                </div>
-
-
-                            </div>
-
-              {/*------------------------------- Finance Section -------------------------------*/}
-
-
-                            <div className='relative' >
-                                <button
-                                    className="2xl:mt-3 mt-1 w-full flex justify-between items-center relative z-[9999]"
-                                >
-                                    <div
-                                        onClick={() => toggleFinanceDropdown()}
-                                        // onMouseEnter={() => { toggleDropdown() }}
-                                        className={`w-full flex justify-between items-center rounded 2xl:py-2.5 py-1.5 pl-6 pr-2.5 group hover:bg-primaryHover dark:hover:bg-white group cursor-pointer`}
-                                    >
-                                        <div className="flex items-center " >
-                                            <span>
-                                                <img
-                                                    className={`brightness-0 invert w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-1 dark:group-hover:brightness-100`}
-                                                    src={''}
-                                                    alt="Box"
-                                                />
-                                            </span>
-                                            <span
-                                                className={`text-foreground dark:text-white lg:block sm:hidden 
-                   text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-black-400 pl-3 sidebar-links group-hover:text-white`}
-                                            >
-                                                {'Finance Section'}
-                                            </span>
-                                        </div>
-
-                                        <p>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth={1.5}
-                                                stroke="currentColor"
-                                                className={`lg:block sm:hidden
-                   w-4 h-4 text-foreground dark:group-hover:brightness-0 indent-1`}
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                                                />
-                                            </svg>
-                                        </p>
-
-                                    </div>
-                                </button>
-
-
-                                <div className='sideBarOpen'>
-                                    {sideBarHoverFinance &&
-                                        <ul>
-                                            <li>
-                                                <button
-                                                    //  to={''}
-                                                    // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                                    className='bg-gray-500'
-                                                    onClick={financeHandler}>
-                                                    <div
-                                                        className={`${isFinance ? 'bg-primaryHover ' : ''
-                                                            } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
-                                                        <div className="flex items-center">
-                                                            <span>
-                                                                <img
-                                                                    className={
-                                                                        'brightness-0 invert  w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100'
-                                                                    }
-                                                                    src={''}
-                                                                    alt="Box"
-                                                                />
-                                                            </span>
-                                                            <span
-                                                                className={`${isFinance ? 'text-white ' : ' text-foreground dark:text-white '
-                                                                    } lg:block
-                                                 text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
-                                                                {'Finance'}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button
-                                                    //  to={''}
-                                                    // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                                    className='bg-gray-500'
-                                                    onClick={financeCategoryHandler}>
-                                                    <div
-                                                        className={`${isFinanceCategories ? 'bg-primaryHover ' : ''
-                                                            } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
-                                                        <div className="flex items-center">
-                                                            <span>
-                                                                <img
-                                                                    className={
-                                                                        'brightness-0 invert  w-5 h-5 group-hover:invert group-hover:brightness-0 dark:brightness-0 dark:invert dark:group-hover:invert-0 dark:group-hover:brightness-100'
-                                                                    }
-                                                                    src={''}
-                                                                    alt="Box"
-                                                                />
-                                                            </span>
-                                                            <span
-                                                                className={`${isFinanceCategories ? 'text-white ' : ' text-foreground dark:text-white '
-                                                                    } lg:block
-                                                 text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
-                                                                {'Finance Categories'}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            </li>
-                                                
-                                        </ul>}
-
-
-
-
-
-
-                                    
-                                </div>
-
-
-                            </div>
-
-
-
-
-                            {/* {SideBarData.map((sidebar) => (
-                                <SidebarItem
-                                    key={sidebar.id}
-                                    sidebarItem={sidebar}
-                                    showFullSidebar={showFullSidebar}
-                                    setDropdownMenu={setDropdownMenu}
-                                    dropdownMenu={dropdownMenu}
-                                />
-                            ))} */}
                         </div>
                         <div className="cursor-pointer flex justify-between items-center rounded 2xl:py-2.5 py-1.5 pr-2.5 pl-6 2xl:mt-3 mt-1 group hover:bg-primaryHover group">
                             <Link to="mailto:customers@ryzeo.com">
