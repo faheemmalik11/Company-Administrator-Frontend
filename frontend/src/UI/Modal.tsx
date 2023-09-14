@@ -10,7 +10,7 @@ interface IModalProps {
 const Modal: React.FC<IModalProps> = ({ isOpen = false, onClose, children}) => {
   
   return (
-    <div onClick={onClose} className={`fixed transition-colors ${isOpen? 'visible bg-black':'invisible'}`}>
+    <div onClick={onClose} style={{ zIndex: 99 }} className={`fixed transition-colors ${isOpen? 'visible bg-black':'invisible'}`}>
         <div className={` border-black bg-white rounded-lg shadow p-6`} onClick={(e)=>{e.stopPropagation()}}>
 
             {children}

@@ -30,7 +30,7 @@ const DeletePopup: React.FC<Props> = ({ setIsStatusPopup, emp_id, setDeleteDepen
     }
 
     return (
-        <div className="border-2">
+        <div className="border-2" >
             <br />
             <table>
                 <thead>

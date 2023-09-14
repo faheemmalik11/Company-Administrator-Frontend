@@ -1,9 +1,11 @@
 import Navbar from "./navbar";
+import NavBAR from "./Nav-bar";
 
 const Header = () => {
     return (
-        <header >
-            <Navbar />
+        <>
+          <NavBAR />
+            {/* <Navbar /> */}
 
              {/* <div
     class="bg-neutral-50 px-6 py-20 text-center text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200">
@@ -18,7 +20,7 @@ const Header = () => {
       >Get started</a
     >
   </div>  */}
-        </header>
+        </>
     );
 };
 

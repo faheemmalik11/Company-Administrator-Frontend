@@ -2,8 +2,8 @@ import React from "react";
 
 interface dropDown {
     key: number;
-    isItem: boolean;
-    itemHandler: () => void;
+    isItem: string;
+    itemHandler: (val:string) => void;
     itemName: string;
     src: string
 }
@@ -71,12 +71,9 @@ const SidebarDropdown: React.FC<Props> = ({ isHover, toggleHandler, src, itemNam
                                 dropDownItems.map((item) => (
                                     <li key={item.key}>
                                         <h2
-                                            //  to={''}
-                                            // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                                            // className='bg-gray-500'
-                                            onClick={item.itemHandler}>
+                                            onClick={()=>item.itemHandler(item.itemName)}>
                                             <div
-                                                className={`${item.isItem ? 'bg-primaryHover ' : ''
+                                                className={`${item.isItem===item.itemName ? 'bg-primaryHover ' : ''
                                                     } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
                                                 <div className="flex items-center">
                                                     <span>
@@ -89,7 +86,7 @@ const SidebarDropdown: React.FC<Props> = ({ isHover, toggleHandler, src, itemNam
                                                         />
                                                     </span>
                                                     <span
-                                                        className={`${item.isItem ? 'text-white ' : ' text-foreground dark:text-white '
+                                                        className={`${item.isItem===item.itemName ? 'text-white ' : ' text-foreground dark:text-white '
                                                             } lg:block
                                                  text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
                                                         {item.itemName}

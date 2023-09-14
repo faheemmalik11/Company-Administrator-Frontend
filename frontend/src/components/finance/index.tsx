@@ -8,6 +8,7 @@ import Modal from "UI/Modal";
 import DeletePopup from "./deletePopup";
 import DataTable from "react-data-table-component";
 import { customStyles } from "UI/tableStyle";
+import { Tooltip } from "react-tooltip";
 
 const Finance = () => {
     const navigate = useNavigate();
@@ -85,7 +86,12 @@ const Finance = () => {
         },
         {
             name: 'Description',
-            cell: (row: Ifinance) => row.description
+            cell: (row: Ifinance) => <button  data-tooltip-id="my-tooltip"
+            data-tooltip-content={row.description} >
+                <Tooltip id="my-tooltip" />
+            <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h9M5 9h5m8-8H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4l3.5 4 3.5-4h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+            </svg></button>
         },
         {
             name: 'Updated at',
@@ -136,60 +142,13 @@ const Finance = () => {
             <DataTable columns={columns}
                 data={financeData} 
                 pagination
-                fixedHeader={true}
+                fixedHeader
+                fixedHeaderScrollHeight='550px'
                 customStyles={customStyles} />
 
+{/* <tr className={((updateId == finance.id) && isHighlighted) ? `border-2 border-green-600` : 'border-2'} key={finance.id}></tr> */}
 
-
-            {/* <table className="border-2">
-                <thead className="border-2">
-                    <tr className="border-2">
-                        <th>Id</th>
-                        <th>Finance Category Id</th>
-                        <th>Company id</th>
-                        <th>Created at</th>
-                        <th>Amount</th>
-                        <th>Check No.</th>
-                        <th>Tax deduction</th>
-                        <th>Description</th>
-                        <th>Updated at</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        financeData.map(finance => {
-                            return (
-                                <tr className={((updateId == finance.id) && isHighlighted) ? `border-2 border-green-600` : 'border-2'} key={finance.id}>
-                                    <td className="border-2">{finance.id}</td>
-                                    <td className="border-2">{finance.finance_category_id}</td>
-                                    <td className="border-2">{finance.company_id}</td>
-                                    <td className="border-2">{finance.created_at}</td>
-                                    <td className="border-2">{finance.amount}</td>
-                                    <td className="border-2">{finance.check_number}</td>
-                                    <td className="border-2">{finance.tax_deduction}</td>
-                                    <td className="border-2">{finance.description}</td>
-                                    <td className="border-2">{finance.updated_at}</td>
-                                    <td className="border-2">
-                                        <button title='update finance data' onClick={() => { updateHandler(finance.id) }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                                                <path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                            </svg>
-                                        </button>
-                                    </td>
-
-                                    <td className="border-2">
-                                        <button title='delete finance data' onClick={() => { deleteHandler(finance.id) }}>
-                                            <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                                                <path d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z" />
-                                            </svg></button></td>
-                                </tr>
-                            )
-                        })
-                    }
-
-                </tbody>
-            </table> */}
+            
         </React.Fragment>
     )
 }

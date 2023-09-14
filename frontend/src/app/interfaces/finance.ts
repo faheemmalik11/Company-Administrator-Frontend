@@ -6,7 +6,7 @@ export interface Ifinance {
     amount?: number | null;
     tax_deduction?: number | null;
     check_number?: string | null;
-    description?: string | null;
+    description?: string | undefined;
     created_at?: string | null;
     updated_at?: string | null;
 }

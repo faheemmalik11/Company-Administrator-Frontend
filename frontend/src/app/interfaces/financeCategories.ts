@@ -4,7 +4,7 @@ export interface IfinanceCategories {
     name: string | null;
     slug: string | null;
     color_code: string | null;
-    description: string | null;
+    description: string | undefined;
     created_at: string | null;
     updated_at: string | null;
 }
