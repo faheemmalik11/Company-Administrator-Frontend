@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { dateFormat } from "utils/date";
 import { useNavigate } from "react-router-dom";
-import DeletePopup from "./deletePopup";
 import Modal from "UI/Modal";
 import { Iitems } from "app/interfaces/inventory_items";
 import { getAllItems } from "services/inventory_items";
@@ -69,7 +68,7 @@ const ItemTable: React.FC<Props> = ({ update_id }) => {
             name: 'Description',
             cell: (row: Iitems) => <button  data-tooltip-id="my-tooltip"
             data-tooltip-content={row.description} >
-                <Tooltip id="my-tooltip" />
+                <Tooltip id="my-tooltip" style={{width: '300px', zIndex: 99}}/>
             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h9M5 9h5m8-8H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4l3.5 4 3.5-4h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
             </svg></button>
@@ -105,7 +104,7 @@ const ItemTable: React.FC<Props> = ({ update_id }) => {
         },
         {
             name: 'Delete',
-            cell: (row: Iitems) => <button title='delete store data' onClick={() => {deleteHandler(row.id)}}>
+            cell: (row: Iitems) => <button title='delete store data' onClick={() => {}}>
             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                 <path d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z" />
             </svg></button>
@@ -114,10 +113,10 @@ const ItemTable: React.FC<Props> = ({ update_id }) => {
     ]
 
 
-    const deleteHandler = (id: number | undefined) => {
-        setFinance_id(id);
-        setIsDeletePopup(true)
-    }
+    // const deleteHandler = (id: number | undefined) => {
+    //     setFinance_id(id);
+    //     setIsDeletePopup(true)
+    // }
 
     const updateHandler = (id: number | undefined) => {
         navigate(`/update_Item/${id}`)
@@ -126,12 +125,12 @@ const ItemTable: React.FC<Props> = ({ update_id }) => {
     return(
         <React.Fragment>
 
-            <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
+            {/* <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
                 {isDeletePopup && <DeletePopup
                     setIsStatusPopup={setIsDeletePopup}
                     finance_id={finance_id}
                     setDeleteDependency={setDeleteDependency} />}
-            </Modal>
+            </Modal> */}
 
             <DataTable columns={columns}
                 data={itemData} 

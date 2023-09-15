@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './index.css';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { IregisterCompanyEmployee } from 'app/interfaces/registerCompanyEmployee';
-import { IRoles } from 'app/interfaces/roles';
 import { registerCompanyEmployee } from 'services/employees';
 import { getCompanyRoles } from 'services/roles';
 import Select from 'react-select';
 import Alert from 'UI/Alert';
 import { useLocation } from 'react-router-dom';
 import { uniqueCnic, uniqueEmail } from 'services/employees';
-import SideBAR from 'components/side_bar/Sidebar';
 import { labelStyle, inputStyle } from 'UI/formStyle';
 const initialValues: IregisterCompanyEmployee = {
     roles_id: [],
@@ -536,7 +533,7 @@ const Add_Employee = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} onClick={() => {
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false} onClick={() => {
                                     resetForm;
                                     if (rolesDataId.length === 0) {
                                         setSelect_ErrorMessage('Please select an option.');

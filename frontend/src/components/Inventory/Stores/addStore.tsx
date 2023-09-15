@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { getAllCategories } from 'services/inventory_categories';
 import { IaddStore } from 'app/interfaces/inventory_addStore';
 import { addInventoryStore } from 'services/inventory_stores';
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const InitialValues: IaddStore = {
     name: '',
@@ -103,7 +104,6 @@ const AddInventoryStore = () => {
         }
         setSelectedOptions(categories)
         setCategoriesId(catId);
-       //console.log(rolesDataId);
         if (select_isTouched) {
             validateSelection();
         }
@@ -127,7 +127,8 @@ const AddInventoryStore = () => {
                     return (
                         <Form className="login__card-form">
                             <br />
-                            <div>Select category
+                            <div>
+                                <label className={labelStyle}>Select a category</label>
                                 <Select
                                     required
                                     value={selectedOptions}
@@ -140,15 +141,16 @@ const AddInventoryStore = () => {
                                     classNamePrefix="select" />
                                 {select_errorMessage && <p style={{ color: 'red' }}>{select_errorMessage}</p>}
                             </div>
+                            <br/>
                             <div>
-                                <label>Name</label>
+                                <label className={labelStyle}>Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         border="1px solid black"
                                         name="name"
                                         type="text"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -157,13 +159,13 @@ const AddInventoryStore = () => {
                             </div>
                             
                             <div>
-                                <label>Unique Identifier</label>
+                                <label className={labelStyle}>Unique Identifier</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="unique_identifier"
                                         type="text"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -171,13 +173,13 @@ const AddInventoryStore = () => {
                                 <ErrorMessage name="unique_identifier" />
                             </div>
                             <div>
-                                <label>Description</label>
+                                <label className={labelStyle}>Description</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="description"
                                         type="text"
-                                    //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -186,7 +188,7 @@ const AddInventoryStore = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} onClick={() => {
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false} onClick={() => {
                                     if (categoriesId.length === 0) {
                                         setSelect_ErrorMessage('Please select an option.');
                                     } else {

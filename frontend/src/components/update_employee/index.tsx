@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import { getCompanyRoles } from 'services/roles';
 import Alert from "UI/updateAlert";
 import { useNavigate } from "react-router-dom";
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const Employee: IupdateCompanyEmployee = {
     roles_id: [],
@@ -251,25 +252,24 @@ const UpdateEmployee = () => {
                             </div>
                             <br />
                             <div>
-                                <label>Additional Roles</label>
+                                <label className={labelStyle}>Additional Roles</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="additional_roles"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Address</label>
+                                <label className={labelStyle}>Address</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
-                                        border="1px solid black"
                                         name="address"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -277,35 +277,35 @@ const UpdateEmployee = () => {
                                 <ErrorMessage name="address" />
                             </div>
                             <div>
-                                <label>Bank Account</label>
+                                <label className={labelStyle}>Bank Account</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="bank_account"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>City</label>
+                                <label className={labelStyle}>City</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="city"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Cnic</label>
+                                <label className={labelStyle}>Cnic</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="cnic"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -313,112 +313,68 @@ const UpdateEmployee = () => {
                                 <ErrorMessage name="cnic" />
                             </div>
                             <div>
-                                <label>Cnic date_of_birth</label>
+                                <label className={labelStyle}>Cnic date_of_birth</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div>
                                     <Field
                                         name="cnic_date_of_birth"
                                         type="date"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
-                            {/* <div>
-                            <label>Company Id</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                            <Field
-                                name="company_id"
-                                type="number"
-                                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                            />
-                            </div>
-                        </div> */}
-                            {/* <div>
-                            <label>Created At</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                            <Field
-                                name="created_at"
-                                type="text"
-                                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                            />
-                            </div>
-                        </div> */}
                             <div>
-                                <label>Current base salary</label>
+                                <label className={labelStyle}>Current base salary</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="current_base_salary"
                                         type="number"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Date of birth</label>
+                                <label className={labelStyle}>Date of birth</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="date_of_birth"
                                         type="date"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
-                            {/* <div>
-                            <label>Date of joining</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                                <Field
-                                    name="date_of_joining"
-                                    type="date"
-                                    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                                />
-                            </div>
-                        </div> */}
-                            {/* <div>
-                            <label>Deleted at</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                            <Field
-                                name="deleted_at"
-                                type="text"
-                                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                            />
-                            </div>
-                        </div> */}
                             <div>
-                                <label>Department</label>
+                                <label className={labelStyle}>Department</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="department"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Designation</label>
+                                <label className={labelStyle}>Designation</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="designation"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Email</label>
+                                <label className={labelStyle}>Email</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="email"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                                 {/* {errors.email && touched.email ? (
@@ -443,94 +399,71 @@ const UpdateEmployee = () => {
                         <div style={{ color: 'red' }}>
                             <ErrorMessage name="password" />
                         </div> */}
-                            {/* <div>
-                            <label>Email verified at</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                            <Field
-                                name="email_verified_at"
-                                type="text"
-                                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                            />
-                            </div>
-                        </div> */}
-                            {/* <div>
-                            <label>Employee Id</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                                <Field
-                                    name="employee_id"
-                                    type="text"
-                                    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                                />
-                            </div>
-                        </div> */}
-                            <div style={{ color: 'red' }}>
-                                <ErrorMessage name="employee_id" />
-                            </div>
+                           
+                           
                             <div>
-                                <label>Hobbies</label>
+                                <label className={labelStyle}>Hobbies</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="hobbies"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Id</label>
+                                <label className={labelStyle}>Id</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="emp_id"
                                         type="number"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Increment Amount</label>
+                                <label className={labelStyle}>Increment Amount</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="increment_amount"
                                         type="number"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Initial_base_salary</label>
+                                <label className={labelStyle}>Initial_base_salary</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="initial_base_salary"
                                         type="number"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Last_increment_date</label>
+                                <label className={labelStyle}>Last_increment_date</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="last_increment_date"
                                         type="date"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Name</label>
+                                <label className={labelStyle}>Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="name"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -538,86 +471,54 @@ const UpdateEmployee = () => {
                                 <ErrorMessage name="name" />
                             </div>
                             <div>
-                                <label>Phone No</label>
+                                <label className={labelStyle}>Phone No</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="phone"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
-                            {/* <div>
-                            <label>Slug</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                            <Field
-                                name="slug"
-                                type="text"
-                                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                            />
-                            </div>
-                        </div> */}
+                            
                             <div>
-                                <label>State</label>
+                                <label className={labelStyle}>State</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="state"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
-                            {/* <div>
-                            <label>Status Id</label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                            <Field
-                                name="status_id"
-                                type="number"
-                                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                            />
-                            </div>
-                        </div> */}
-
-                            {/* <div>
-                            <label>Updated at </label>
-                            <br />
-                            <div style={{ border: '1px solid black' }}>
-                            <Field
-                                name="updated_at"
-                                type="text"
-                                className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
-                            />
-                            </div>
-                        </div> */}
+                       
                             <div>
-                                <label>Vehicle registration number</label>
+                                <label className={labelStyle}>Vehicle registration number</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="vehicle_registration_number"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Zip</label>
+                                <label className={labelStyle}>Zip</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="zip"
                                         type="text"
-                                        className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false}  >
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false}  >
                                     Submit
                                 </button>
                             </div>

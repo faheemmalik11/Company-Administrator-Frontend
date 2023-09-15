@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { IaddFinanceCategory } from "app/interfaces/add_financeCategories";
 import { getFinanceCategorybyId, updateFinanceCategory } from "services/finance_categories";
 import Alert from "UI/updateAlert";
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const finance: IaddFinanceCategory = {
     name: '',
@@ -66,7 +67,7 @@ const UpdateFinanceCategory = () => {
              {isAlert && <Alert responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
                  />}
-            <h1>Update Finance Data</h1>
+            <h1>Update Finance Category</h1>
             <Formik
                 initialValues={financeData}
                 validationSchema={validationSchema}
@@ -79,14 +80,14 @@ const UpdateFinanceCategory = () => {
                             <br />
 
                             <div>
-                                <label>Name</label>
+                                <label className={labelStyle}>Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         border="1px solid black"
                                         name="name"
                                         type="text"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -94,13 +95,13 @@ const UpdateFinanceCategory = () => {
                                 <ErrorMessage name="name" />
                             </div>
                             <div>
-                                <label>Color Code</label>
+                                <label className={labelStyle}>Color Code</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="color_code"
                                         type="text"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -108,13 +109,13 @@ const UpdateFinanceCategory = () => {
                                 <ErrorMessage name="color_code" />
                             </div>
                             <div>
-                                <label>Description</label>
+                                <label className={labelStyle}>Description</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="description"
                                         type="text"
-                                    //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -123,7 +124,7 @@ const UpdateFinanceCategory = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false}>
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false}>
                                     Submit
                                 </button>
                             </div>

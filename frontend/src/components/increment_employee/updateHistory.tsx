@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { IincrementHistory } from "app/interfaces/incrementHistory";
 import { useNavigate } from "react-router";
 import Alert from "UI/updateAlert";
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const InitialData: IincrementHistory = {
     created_at: '',
@@ -61,10 +62,7 @@ const UpdateHistory = () => {
         else {
             setResponseMessage(response.message)
             setIsAlert(true);
-        }
-        
-        
-        
+        }   
     };
     return (
         <React.Fragment>
@@ -80,40 +78,40 @@ const UpdateHistory = () => {
                             <br />
                             
                             <div>
-                                <label>Increment Amount</label>
+                                <label className={labelStyle}>Increment Amount</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="increment_amount"
                                         type="number"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Notes</label>
+                                <label className={labelStyle}>Notes</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div>
                                     <Field
                                         name="notes"
                                         type="text"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Increment Effective Date</label>
+                                <label className={labelStyle}>Increment Effective Date</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="increment_effective_date"
                                         type="date"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false}  >
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false}  >
                                     Update
                                 </button>
                             </div>

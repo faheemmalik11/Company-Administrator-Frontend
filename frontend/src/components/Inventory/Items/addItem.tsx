@@ -7,6 +7,7 @@ import { getAllCategories } from 'services/inventory_categories';
 import { addInventoryStore, getAllStores } from 'services/inventory_stores';
 import { IaddItem } from 'app/interfaces/inventory_addItem';
 import { addInventoryItem } from 'services/inventory_items';
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const itemInitialValues: IaddItem = {
     name: '',
@@ -175,10 +176,11 @@ const AddInventoryItem = () => {
                         <Form className="login__card-form">
                             
                             <br />
-                            <div>Select Store
+                            <div>
+                                <label className={labelStyle}>Select Store</label>
                                 <Select
                                     required
-                                    value={selectedOptionsStores}
+                                  //  value={selectedOptionsStores}
                                    // isMulti
                                     name='finance_category_id'
                                     options={storeOption}
@@ -190,10 +192,11 @@ const AddInventoryItem = () => {
                                 <p style={{ color: 'red' }}>{selectStore_errorMessage}</p>}
                             </div>
                             <br />
-                            <div>Select category
+                            <div>
+                                <label className={labelStyle}>Select category</label>
                                 <Select
                                     required
-                                    value={selectedOptionsCategories}
+                                   // value={selectedOptionsCategories}
                                     //isMulti
                                     name='finance_category_id'
                                     options={CategoryOption}
@@ -204,15 +207,16 @@ const AddInventoryItem = () => {
                                 {selectCategories_errorMessage &&
                                  <p style={{ color: 'red' }}>{selectCategories_errorMessage}</p>}
                             </div>
+                            <br/>
                             <div>
-                                <label>Name</label>
+                                <label className={labelStyle}>Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         border="1px solid black"
                                         name="name"
                                         type="text"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -221,13 +225,13 @@ const AddInventoryItem = () => {
                             </div>
                             
                             <div>
-                                <label>Quantity</label>
+                                <label className={labelStyle}>Quantity</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="quantity"
                                         type="number"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -235,13 +239,13 @@ const AddInventoryItem = () => {
                                 <ErrorMessage name="quantity" />
                             </div>
                             <div>
-                                <label>Description</label>
+                                <label className={labelStyle}>Description</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="description"
                                         type="text"
-                                    //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -250,7 +254,7 @@ const AddInventoryItem = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} onClick={() => {
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false} onClick={() => {
                                     if (selectedOptionsCategories.value === 0) {
                                         setSelectCategories_ErrorMessage('Please select an option.');
                                     } else {

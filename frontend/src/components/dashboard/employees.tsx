@@ -4,12 +4,11 @@ import { getCompanyEmployees } from 'services/employees';
 import { Link, useNavigate } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 //import StatusPopup from './statusPopup';
-//import Modal from "./Modal";
 import { dateFormat } from 'utils/date';
-import DeletePopup from './deletePopup';
+import DeletePopup from 'UI/deletePopup';
 import Modal from 'UI/Modal';
 import { customStyles } from 'UI/tableStyle';
-import useDidMountEffect from 'hooks/useDidMountEffect';
+import { deleteCompanyEmployeeById } from "services/employees";
 
 interface Props {
     update_id: number | undefined,
@@ -24,6 +23,7 @@ const Employees: React.FC<Props> = ({ update_id }) => {
     const [isDeletePopup, setIsDeletePopup] = useState<boolean>(false);
     const [employeeId, setEmployeeId] = useState<number>();
     const [deleteDependency, setDeleteDependency] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
 
@@ -42,8 +42,6 @@ const Employees: React.FC<Props> = ({ update_id }) => {
         }
         getAllEmployees();
     }, [isStatusPopup, deleteDependency])
-    //useDidMountEffect(getAllEmployees,[deleteDependency])
-
 
     useEffect(() => {
         setIsHighlighted(true)
@@ -73,6 +71,19 @@ const Employees: React.FC<Props> = ({ update_id }) => {
         setEmployeeId(id);
         setIsDeletePopup(true)
     }
+
+    const deleteHandlerInPopup = async (id: number | undefined) => {
+        setIsLoading(false)
+        const response = await deleteCompanyEmployeeById(id);
+        if (response.code === 200) {
+            setIsDeletePopup(false);
+            setDeleteDependency(true);
+        }
+        else {
+
+        }
+    }
+    
     
     const columns = [
         {
@@ -146,11 +157,12 @@ const Employees: React.FC<Props> = ({ update_id }) => {
             </Modal> */}
             <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
                 {isDeletePopup && <DeletePopup
-                    setIsStatusPopup={setIsDeletePopup}
-                    emp_id={employeeId}
-                    setDeleteDependency={setDeleteDependency} />}
+                    deleteHandlerInPopup={deleteHandlerInPopup}
+                    setIsDeletePopup={setIsDeletePopup}
+                    id={employeeId}
+                    isLoading={isLoading} />}
             </Modal>
-            <button onClick={handleAddEmployee}>Add new employee</button>
+            <button className="bg-sky-400" onClick={handleAddEmployee}>Add new employee</button>
             
             <DataTable
                 

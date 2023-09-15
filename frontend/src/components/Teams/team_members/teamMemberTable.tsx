@@ -1,13 +1,12 @@
-import { ITeam } from "app/interfaces/team";
 import React, { useState, useEffect } from "react";
-import { getAllTeamsData, getTeamDatabyId } from "services/team";
+import { getTeamDatabyId } from "services/team";
 import { useParams } from "react-router-dom";
-import { IEmployee } from "app/interfaces/employee";
 import Modal from "UI/Modal";
-import AddMemberPopup from "./addMemberPopup";
-import DeletePopup from "./deletePopup";
+import AddMemberPopup from "UI/addMemberPopup";
+import DeletePopup from "UI/deletePopup";
 import DataTable from "react-data-table-component";
 import { customStyles } from "UI/tableStyle";
+import {  deleteTeamMember } from "services/team";
 
 interface Props {
     team_lead_id: number | undefined,
@@ -25,9 +24,11 @@ const TeamMembersTable: React.FC<Props> = ({ team_lead_id }) => {
     const [teamData, setTeamData] = useState<IteamMmber[]>([]);
     const [deleteDependency, setDeleteDependency] = useState<boolean>(false);
     const [addMemberDependency, setAddMemberDependency] = useState<boolean>(false);
-    const [isStatusPopup, setIsStatusPopup] = useState<boolean>(false);
+    const [isAddMemberPopup, setIsAddMemberPopup] = useState<boolean>(false);
     const [isDeletePopup, setIsDeletePopup] = useState<boolean>(false);
+
     const [empId, setEmpId] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
 
@@ -76,26 +77,39 @@ const TeamMembersTable: React.FC<Props> = ({ team_lead_id }) => {
     }
 
     const handleAddTeamMember = () => {
-        setIsStatusPopup(true);
+        setIsAddMemberPopup(true);
+    }
+    const deleteHandlerInPopup = async (id: number | undefined,val2: number | undefined ,team_id: string | undefined) => {
+        setIsLoading(false);
+        const response = await deleteTeamMember({team_id: team_id, employee_id: id})
+        if (response.code === 200) {
+            setIsDeletePopup(false);
+            setDeleteDependency(true);
+        }
+        else {
+
+        }
     }
 
     return (
         <React.Fragment>
-            <Modal isOpen={isStatusPopup} onClose={() => { setIsStatusPopup(false) }}>
-                {isStatusPopup && <AddMemberPopup
-                    setIsStatusPopup={setIsStatusPopup}
+            <Modal isOpen={isAddMemberPopup} onClose={() => { setIsAddMemberPopup(false) }}>
+                {isAddMemberPopup && <AddMemberPopup
+                    setIsStatusPopup={setIsAddMemberPopup}
                     team_id={team_id}
                     setAddMemberDependency={setAddMemberDependency} />}
             </Modal>
 
             <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
                 {isDeletePopup && <DeletePopup
-                    setIsStatusPopup={setIsDeletePopup}
-                    emp_id={empId}
+                    setIsDeletePopup={setIsDeletePopup}
+                    isLoading={isLoading}
                     team_id={team_id}
-                    setDeleteDependency={setDeleteDependency} />}
+                    //emp_id={empId}
+                    id={empId}
+                    deleteHandlerInPopup={deleteHandlerInPopup} />}
             </Modal>
-            <button onClick={handleAddTeamMember}>Add new Member</button>
+            <button className="bg-sky-400" onClick={handleAddTeamMember}>Add new Member</button>
 
             <DataTable columns={columns}
                 data={teamData} 

@@ -77,7 +77,7 @@ const SideBAR: React.FC<Props> = ({
 
     return (
         <React.Fragment>
-            <div className="bg-gray-500">
+            <div className="bg-gray-500" style={{float: 'right'}}>
                 <div
                     id="sidebar-mob"
                     className={`h-screen sm:block sm:ml-0  sideBarBackground lg:w-64 sm:w-16 w-54 overflow-auto sidebarscreen:left-0 

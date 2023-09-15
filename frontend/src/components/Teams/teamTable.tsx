@@ -4,10 +4,11 @@ import { getAllTeamsData } from "services/team";
 import { dateFormat } from "utils/date";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "UI/Modal";
-import DeletePopup from "./deletePopup";
+import DeletePopup from "UI/deletePopup";
 import DataTable from "react-data-table-component";
 import { customStyles } from "UI/tableStyle";
 import { Tooltip } from "react-tooltip";
+import { deleteTeamById } from "services/team";
 
 interface Props {
     update_id: number | undefined,
@@ -21,6 +22,7 @@ const TeamTable: React.FC<Props>  = ({update_id}) => {
     const [highlightedId, setHighlightedId] = useState<number>();
     const [isDeletePopup, setIsDeletePopup] = useState<boolean>(false);
     const [team_id, setTeam_id] = useState<number>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         
@@ -70,7 +72,7 @@ const TeamTable: React.FC<Props>  = ({update_id}) => {
             name: 'Description',
             cell: (row: ITeam) => <button  data-tooltip-id="my-tooltip"
             data-tooltip-content={row.description} >
-                <Tooltip id="my-tooltip" />
+                <Tooltip id="my-tooltip" style={{width: '300px', zIndex: 99}}/>
             <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5h9M5 9h5m8-8H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h4l3.5 4 3.5-4h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
             </svg></button>
@@ -119,14 +121,27 @@ const TeamTable: React.FC<Props>  = ({update_id}) => {
         navigate(`/update_team/${id}`)
     }
 
+    const deleteHandlerInPopup = async (id: number | undefined) => {
+        setIsLoading(false);
+        const response = await deleteTeamById(id);
+        if (response.code === 200) {
+            setIsDeletePopup(false);
+            setDeleteDependency(true);
+        }
+        else {
+
+        }
+    }
+
     return(
         <React.Fragment>
 
             <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
                 {isDeletePopup && <DeletePopup
-                    setIsStatusPopup={setIsDeletePopup}
-                    finance_id={team_id}
-                    setDeleteDependency={setDeleteDependency} />}
+                    setIsDeletePopup={setIsDeletePopup}
+                    id={team_id}
+                    isLoading={isLoading}
+                    deleteHandlerInPopup={deleteHandlerInPopup} />}
             </Modal>
 
             <DataTable columns={columns}

@@ -47,7 +47,7 @@ const Dashboard = () => {
         }
     })
 
-    return <React.Fragment>
+    return <div>
 
         <Header />
         
@@ -59,16 +59,11 @@ const Dashboard = () => {
 
 
         <h1>{welcomeMessege}</h1>
-        {isAdmin &&
-            <>
-            {
-                getComponents()
-            }
-                
-            </>}
+
+        {isAdmin && getComponents()  }
 
         <Footer />
-    </React.Fragment>
+    </div>
 }
 
 export default Dashboard;

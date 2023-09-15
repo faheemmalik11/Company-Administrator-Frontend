@@ -25,6 +25,15 @@ const NavBAR = () => {
         navigate('/update_setting');
     };
 
+    const logoutHandler = () => {
+      logout();
+      if (user.roles.includes('all')) {
+          navigate('/companylogin');
+      } else {
+          navigate('/login');
+      }
+  };
+
     return(<div>
         <header className="border-b bg-slate-400 md:px-6 px-4 dark:bg-transparent flex items-center h-[70px] border-[#E9EBEC] dark:border-[#fff]">
           <div
@@ -76,6 +85,15 @@ const NavBAR = () => {
                     >
                       <img className="w-4 h-6 mr-1.5" src={Filter} />
                       <p className="text-[#212529] text-sm">Edit Profile</p>
+                    </button>
+
+                    <button
+                      onClick={logoutHandler}
+                      type='button'
+                      className="flex items-center px-4 h-9 hover:bg-[#F3F6F9] w-full"
+                    >
+                      <img className="w-4 h-6 mr-1.5" src={Cloud} />
+                      <p className="text-[#212529] text-sm">Logout</p>
                     </button>
                     
                   </div>
