@@ -4,7 +4,11 @@ import axios from "utils/axios";
 
 interface IteamMember{
     team_id: string | undefined,
-    employee_id: number[] | undefined
+    employees_id: number[] | undefined
+}
+interface IteamMemberDelete{
+    team_id: string | undefined,
+    employee_id: number | undefined
 }
 
 export const getAllTeamsData = async () => {
@@ -87,14 +91,13 @@ export const deleteTeamById = async (id: number | undefined) => {
     }
 };
 
-export const deleteTeamMember = async (body: any) => {
+export const deleteTeamMember = async (body: IteamMemberDelete) => {
     try {
         const  response: any = await axios.post(
             `${config.defaults.api_url}/remove_employee`, body
         );
 
         console.log('response from delete team member: ', response);
-       // console.log('data employee', data.IncrementHistory);
       
         return response;
     } catch (error) {

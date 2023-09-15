@@ -1,13 +1,12 @@
-import { ITeam } from "app/interfaces/team";
 import React, { useState, useEffect } from "react";
-import { getAllTeamsData, getTeamDatabyId } from "services/team";
+import { getTeamDatabyId } from "services/team";
 import { useParams } from "react-router-dom";
-import { IEmployee } from "app/interfaces/employee";
 import Modal from "UI/Modal";
-import AddMemberPopup from "./addMemberPopup";
-import DeletePopup from "./deletePopup";
+import AddMemberPopup from "UI/addMemberPopup";
+import DeletePopup from "UI/deletePopup";
 import DataTable from "react-data-table-component";
 import { customStyles } from "UI/tableStyle";
+import {  deleteTeamMember } from "services/team";
 
 interface Props {
     team_lead_id: number | undefined,
@@ -25,9 +24,11 @@ const TeamMembersTable: React.FC<Props> = ({ team_lead_id }) => {
     const [teamData, setTeamData] = useState<IteamMmber[]>([]);
     const [deleteDependency, setDeleteDependency] = useState<boolean>(false);
     const [addMemberDependency, setAddMemberDependency] = useState<boolean>(false);
-    const [isStatusPopup, setIsStatusPopup] = useState<boolean>(false);
+    const [isAddMemberPopup, setIsAddMemberPopup] = useState<boolean>(false);
     const [isDeletePopup, setIsDeletePopup] = useState<boolean>(false);
+
     const [empId, setEmpId] = useState<number>(0);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
 
@@ -44,21 +45,21 @@ const TeamMembersTable: React.FC<Props> = ({ team_lead_id }) => {
     const columns = [
         {
             name: 'Id',
-            selector: (row: any) => row.id
+            cell: (row: IteamMmber) => row.id
         },
         {
             name: 'Name',
-            selector: (row: any) =><div title={((team_lead_id == row.id)) ? `team lead` : ''}
+            cell: (row: IteamMmber) =><div title={((team_lead_id == row.id)) ? `team lead` : ''}
             className={((team_lead_id == row.id)) ? `bg-green-500/100 border-2 border-green-600 ` : 'border-2'}>
             {row.name} </div>
         },
         {
             name: 'Email',
-            selector: (row: IteamMmber) => row.email
+            cell: (row: IteamMmber) => row.email
         },
         {
             name: 'Cnic',
-            selector: (row: IteamMmber) => row.cnic
+            cell: (row: IteamMmber) => row.cnic
         },
         {
             name: 'Action',
@@ -76,69 +77,47 @@ const TeamMembersTable: React.FC<Props> = ({ team_lead_id }) => {
     }
 
     const handleAddTeamMember = () => {
-        setIsStatusPopup(true);
+        setIsAddMemberPopup(true);
+    }
+    const deleteHandlerInPopup = async (id: number | undefined,val2: number | undefined ,team_id: string | undefined) => {
+        setIsLoading(false);
+        const response = await deleteTeamMember({team_id: team_id, employee_id: id})
+        if (response.code === 200) {
+            setIsDeletePopup(false);
+            setDeleteDependency(true);
+        }
+        else {
+
+        }
     }
 
     return (
         <React.Fragment>
-            <Modal isOpen={isStatusPopup} onClose={() => { setIsStatusPopup(false) }}>
-                {isStatusPopup && <AddMemberPopup
-                    setIsStatusPopup={setIsStatusPopup}
+            <Modal isOpen={isAddMemberPopup} onClose={() => { setIsAddMemberPopup(false) }}>
+                {isAddMemberPopup && <AddMemberPopup
+                    setIsStatusPopup={setIsAddMemberPopup}
                     team_id={team_id}
                     setAddMemberDependency={setAddMemberDependency} />}
             </Modal>
 
             <Modal isOpen={isDeletePopup} onClose={() => { setIsDeletePopup(false) }}>
                 {isDeletePopup && <DeletePopup
-                    setIsStatusPopup={setIsDeletePopup}
-                    emp_id={empId}
+                    setIsDeletePopup={setIsDeletePopup}
+                    isLoading={isLoading}
                     team_id={team_id}
-                    setDeleteDependency={setDeleteDependency} />}
+                    //emp_id={empId}
+                    id={empId}
+                    deleteHandlerInPopup={deleteHandlerInPopup} />}
             </Modal>
-            <button onClick={handleAddTeamMember}>Add new Member</button>
+            <button className="bg-sky-400" onClick={handleAddTeamMember}>Add new Member</button>
 
             <DataTable columns={columns}
                 data={teamData} 
                 pagination
-                fixedHeader={true}
+                fixedHeader
+                fixedHeaderScrollHeight='550px'
                 customStyles={customStyles} />
 
-
-            {/* <table className="border-2">
-                <thead className="border-2">
-                    <tr className="border-2">
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Cnic</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        teamData.map(team => {
-                            return (
-                                <tr key={team.id}>
-                                    <td className="border-2">{team.id}</td>
-                                    <td title={((team_lead_id == team.id)) ? `team lead` : ''}
-                                        className={((team_lead_id == team.id)) ? `bg-green-500/100 border-2 border-green-600 ` : 'border-2'}>
-                                        {team.name}
-                                    </td>
-                                    <td className="border-2">{team.email}</td>
-                                    <td className="border-2">{team.cnic}</td>
-
-                                    <td className="border-2">
-                                        <button className={((team_lead_id == team.id)) ? `invisible ...` : ''} title='delete store data' onClick={() => { deleteHandler(team.id) }}>
-                                            <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                                                <path d="M19 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1ZM2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H2Zm11 3a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8a1 1 0 0 1 2 0h2a1 1 0 0 1 2 0v1Z" />
-                                            </svg></button></td>
-                                </tr>
-                            )
-                        })
-                    }
-
-                </tbody>
-            </table> */}
         </React.Fragment>
     )
 }

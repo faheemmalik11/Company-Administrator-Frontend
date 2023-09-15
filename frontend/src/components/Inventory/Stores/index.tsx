@@ -24,7 +24,7 @@ const Store = () => {
         <React.Fragment>
             {/* <SideBar /> */}
             <h1>Store Section</h1>
-            <button onClick={handleAddStore}>Add new Store</button>
+            <button className="bg-sky-400" onClick={handleAddStore}>Add new Store</button>
             <StoreTable update_id={updateId}/>
         </React.Fragment>
     )

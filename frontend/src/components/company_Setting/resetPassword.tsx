@@ -5,6 +5,7 @@ import { resetCompanyPassword } from 'services/companySetting';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'UI/updateAlert';
 import { IresetPassword } from "app/interfaces/resetPassword";
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const initialValues: IresetPassword = {
     current_password: '',
@@ -60,14 +61,13 @@ const ResetPassword = () => {
                             <br />
 
                             <div>
-                                <label>Current Password</label>
+                                <label className={labelStyle}>Current Password</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
-                                        border="1px solid black"
                                         name="current_password"
                                         type="password"
-                                        //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -75,13 +75,13 @@ const ResetPassword = () => {
                                 <ErrorMessage name="current_password" />
                             </div>
                             <div>
-                                <label>Password</label>
+                                <label className={labelStyle}>Password</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="password"
                                         type="password"
-                                        //   className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -89,13 +89,13 @@ const ResetPassword = () => {
                                 <ErrorMessage name="password" />
                             </div>
                             <div>
-                                <label>Confirm Password</label>
+                                <label className={labelStyle}>Confirm Password</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="password_confirmation"
                                         type="password"
-                                        // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -104,7 +104,7 @@ const ResetPassword = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false}>
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false}>
                                     Submit
                                 </button>
                             </div>

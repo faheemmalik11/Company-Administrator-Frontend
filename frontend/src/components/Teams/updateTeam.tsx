@@ -6,6 +6,7 @@ import { IaddTeam } from 'app/interfaces/add_team';
 import { getTeamDatabyId, getTeamLeads, updateTeamData } from 'services/team';
 import Alert from 'UI/Alert';
 import { useParams, useNavigate } from 'react-router-dom';
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const InitialValues: IaddTeam = {
     name: '',
@@ -128,7 +129,8 @@ const UpdateTeam = () => {
                     return (
                         <Form className="login__card-form">
                             <br />
-                            <div>Select a team lead
+                            <div>
+                                <label className={labelStyle}>Select a team lead</label>
                                 <Select
                                     required
                                     value={selectedOptions}
@@ -141,16 +143,16 @@ const UpdateTeam = () => {
                                     classNamePrefix="select" />
                                 {select_errorMessage && <p style={{ color: 'red' }}>{select_errorMessage}</p>}
                             </div>
-
+                            <br/>
                             <div>
-                                <label>Team Name</label>
+                                <label className={labelStyle}>Team Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         border="1px solid black"
                                         name="name"
                                         type="text"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -159,13 +161,13 @@ const UpdateTeam = () => {
                             </div>
 
                             <div>
-                                <label>Description</label>
+                                <label className={labelStyle}>Description</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="description"
                                         type="text"
-                                    //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -174,7 +176,7 @@ const UpdateTeam = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} onClick={() => {
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false} onClick={() => {
                                     resetForm;
                                     if (selectedOptions.value === 0) {
                                         setSelect_ErrorMessage('Please select an option.');

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import celestialImage from 'assets/celestials-logo-300x97-1.png';
 import SidebarItems from './sideBarItems';
 import SidebarDropdown from './sideBarDropdown';
@@ -9,39 +9,22 @@ import Cloud from 'assets/cloud.svg';
 import Filter from 'assets/filter.svg';
 import Target from 'assets/target.svg';
 import Mail from 'assets/mail.svg';
+import { logout } from 'services/auth';
+import AuthContext from 'app/contexts/authContext';
 
 interface Props {
-    setIsEmployee: (val: boolean) => void;
-    setIsFinance: (val: boolean) => void;
-    setIsFinanceCategories: (val: boolean) => void;
-    setIsItem: (val: boolean) => void;
-    setIsCategory: (val: boolean) => void;
-    setIsStore: (val: boolean) => void;
-    setIsTeam: (val: boolean) => void;
-    isEmployee: boolean;
-    isFinance: boolean;
-    isFinanceCategories: boolean;
-    isItem: boolean;
-    isCategory: boolean;
-    isStore: boolean;
-    isTeam: boolean;
+    
+    setTableName: (val: string) => void;
+    
+    tableName: string;
 }
 const SideBAR: React.FC<Props> = ({
-    setIsFinance,
-    setIsFinanceCategories,
-    setIsCategory,
-    setIsItem,
-    setIsStore,
-    setIsEmployee,
-    setIsTeam,
-    isEmployee,
-    isFinance,
-    isFinanceCategories,
-    isItem,
-    isCategory,
-    isStore,
-    isTeam,
+   
+    setTableName,
+    tableName
 }) => {
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
     const [sideBarHover, setSideBarHover] = useState(false);
     const [isSideBarActive, setIsSideBarActive] = useState(true);
     const [sideBarHoverFinance, setSideBarHoverFinance] = useState(false);
@@ -78,104 +61,23 @@ const SideBAR: React.FC<Props> = ({
         }
 
     };
-    const employeeHandler = () => {
-        setIsEmployee(true);
-        setIsFinance(false);
-        setIsFinanceCategories(false);
-        setIsCategory(false);
-        setIsItem(false);
-        setIsStore(false);
-        setIsTeam(false);
+    
+    const logoutHandler = () => {
+        logout();
+        if (user.roles.includes('all')) {
+            navigate('/companylogin');
+        } else {
+            navigate('/login');
+        }
     };
-    const financeHandler = () => {
-        setIsEmployee(false)
-        setIsFinance(true);
-        setIsFinanceCategories(false);
-        setIsCategory(false);
-        setIsItem(false);
-        setIsStore(false);
-        setIsTeam(false);
+
+    const navItemHandler = (name : string) => {
+        setTableName(name);
     }
 
-    const financeCategoryHandler = () => {
-        setIsEmployee(false)
-        setIsFinance(false);
-        setIsFinanceCategories(true);
-        setIsCategory(false);
-        setIsItem(false);
-        setIsStore(false);
-        setIsTeam(false);
-    }
-
-    const storeHandler = () => {
-        setIsEmployee(false)
-        setIsFinance(false);
-        setIsFinanceCategories(false);
-        setIsCategory(false);
-        setIsItem(false);
-        setIsStore(true);
-        setIsTeam(false);
-    }
-
-    const categoryHandler = () => {
-        setIsEmployee(false)
-        setIsFinance(false);
-        setIsFinanceCategories(false);
-        setIsCategory(true);
-        setIsItem(false);
-        setIsStore(false);
-        setIsTeam(false);
-    }
-
-    const itemHandler = () => {
-        setIsEmployee(false)
-        setIsFinance(false);
-        setIsFinanceCategories(false);
-        setIsCategory(false);
-        setIsItem(true);
-        setIsStore(false);
-        setIsTeam(false);
-    }
-    const teamHandler = () => {
-        setIsEmployee(false)
-        setIsFinance(false);
-        setIsFinanceCategories(false);
-        setIsCategory(false);
-        setIsItem(false);
-        setIsStore(false);
-        setIsTeam(true);
-    }
     return (
         <React.Fragment>
-            <div className="bg-gray-500">
-                {/* {showSidebar && (
-                    <div
-                        className="fixed top-0 w-full h-full z-10 bg-black-200 duration-300"
-                        onClick={toggleSidebar}
-                    />
-                )} */}
-                {/* {(
-                    <div
-
-                        className='left-[240px] rotate-180
-                             fixed rounded-full flex items-center   w-8 h-8 z-20 top-12 bodyShadow cursor-pointer sideBarBackground'
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="mx-auto w-6 h-6 text-white"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                            />
-                        </svg>
-                    </div>
-                )} */}
+            <div className="bg-gray-500" style={{float: 'right'}}>
                 <div
                     id="sidebar-mob"
                     className={`h-screen sm:block sm:ml-0  sideBarBackground lg:w-64 sm:w-16 w-54 overflow-auto sidebarscreen:left-0 
@@ -188,24 +90,18 @@ const SideBAR: React.FC<Props> = ({
                                 alt="Logo"
                             />
                         </div>
-                        {/* // :
-                            // <img
-                            //     className="invert-[100%] sepia-[0%] saturate-[7427%] hue-rotate-[23deg] brightness-[0%] contrast-[118%] "
-                            //     src={LogoInitial}
-                            //     alt="Logo"
-                            // /> */}
                     </div>
 
-                    <div className="bg-sky-400 flex flex-col justify-between h-sideBarContentHeight px-2 pb-6">
+                    <div className="flex flex-col justify-between h-sideBarContentHeight px-2 pb-6">
                         <div>
 
-                            <SidebarItems isSidebarItem={isEmployee}
-                                sidebarItemHandler={employeeHandler}
+                            <SidebarItems isSidebarItem={tableName}
+                                sidebarItemHandler={navItemHandler}
                                 itemName='Employee'
                                 src={BoxImage} />
 
-                            <SidebarItems isSidebarItem={isTeam}
-                                sidebarItemHandler={teamHandler}
+                            <SidebarItems isSidebarItem={tableName}
+                                sidebarItemHandler={navItemHandler}
                                 itemName='Team'
                                 src={Activity} />
 
@@ -215,9 +111,9 @@ const SideBAR: React.FC<Props> = ({
                                 src={Cloud}
                                 isHover={sideBarHover}
                                 itemName='Inventory Section'
-                                dropDownItems={[{ key:1, isItem: isItem, itemHandler: itemHandler, itemName: 'Item',src:Mail },
-                                {key:2, isItem: isStore, itemHandler: storeHandler, itemName: 'Store',src:Target },
-                                {key:3,  isItem: isCategory, itemHandler: categoryHandler, itemName: 'Category', src:Cloud }]} />
+                                dropDownItems={[{ key: 1, isItem: tableName, itemHandler: setTableName, itemName: 'Item', src: Mail },
+                                { key: 2, isItem: tableName, itemHandler: setTableName, itemName: 'Store', src: Target },
+                                { key: 3, isItem: tableName, itemHandler: setTableName, itemName: 'Category', src: Cloud }]} />
 
 
                             {/*------------------------------- Finance Section -------------------------------*/}
@@ -226,14 +122,22 @@ const SideBAR: React.FC<Props> = ({
                                 src={Filter}
                                 isHover={sideBarHoverFinance}
                                 itemName='Finance Section'
-                                dropDownItems={[{key:1 , isItem: isFinance, itemHandler: financeHandler, itemName: 'Finance',src:Filter },
-                                {key:2, isItem: isFinanceCategories, itemHandler: financeCategoryHandler, itemName: 'Finance Categories',src:Mail }
+                                dropDownItems={[{ key: 1, isItem: tableName, itemHandler: setTableName, itemName: 'Finance', src: Filter },
+                                { key: 2, isItem: tableName, itemHandler: setTableName, itemName: 'Finance_Categories', src: Mail }
                                 ]} />
 
 
 
 
                         </div>
+
+                        <div style={{ position: 'absolute', bottom: 70 }}>
+                            <SidebarItems isSidebarItem={'abc'}
+                                sidebarItemHandler={logoutHandler}
+                                itemName='Logout'
+                                src={Activity} />
+                        </div>
+
                         <div className="cursor-pointer flex justify-between items-center rounded 2xl:py-2.5 py-1.5 pr-2.5 pl-6 2xl:mt-3 mt-1 group hover:bg-primaryHover group">
                             <Link to="mailto:customers@ryzeo.com">
                                 <div className="flex items-center">

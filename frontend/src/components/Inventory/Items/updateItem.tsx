@@ -8,6 +8,7 @@ import { addInventoryStore, getAllStores } from 'services/inventory_stores';
 import { IaddItem } from 'app/interfaces/inventory_addItem';
 import { addInventoryItem, getInventoryItembyId, updateInventoryItem } from 'services/inventory_items';
 import { useParams, useNavigate } from 'react-router-dom';
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const itemInitialValues: IaddItem = {
     name: '',
@@ -198,7 +199,7 @@ const UpdateInventoryItem = () => {
              {isAlert && <Alert responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
                  />}
-            <h1>Add Item Data</h1>
+            <h1>Update Item Data</h1>
             <Formik initialValues={itemData}
                 enableReinitialize
                 validationSchema={validationSchema}
@@ -208,7 +209,8 @@ const UpdateInventoryItem = () => {
                         <Form className="login__card-form">
 
                             <br />
-                            <div>Select Store
+                            <div>
+                                <label className={labelStyle}>Select Store</label>
                                 <Select
                                     required
                                     value={selectedOptionsStores}
@@ -223,7 +225,8 @@ const UpdateInventoryItem = () => {
                                     <p style={{ color: 'red' }}>{selectStore_errorMessage}</p>}
                             </div>
                             <br />
-                            <div>Select category
+                            <div>
+                                <label className={labelStyle}>Select category</label>
                                 <Select
                                     required
                                     value={selectedOptionsCategories}
@@ -238,14 +241,14 @@ const UpdateInventoryItem = () => {
                                     <p style={{ color: 'red' }}>{selectCategories_errorMessage}</p>}
                             </div>
                             <div>
-                                <label>Name</label>
+                                <label className={labelStyle}>Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         border="1px solid black"
                                         name="name"
                                         type="text"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -254,13 +257,13 @@ const UpdateInventoryItem = () => {
                             </div>
 
                             <div>
-                                <label>Quantity</label>
+                                <label className={labelStyle}>Quantity</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="quantity"
                                         type="number"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -268,13 +271,13 @@ const UpdateInventoryItem = () => {
                                 <ErrorMessage name="quantity" />
                             </div>
                             <div>
-                                <label>Description</label>
+                                <label className={labelStyle}>Description</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="description"
                                         type="text"
-                                    //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -283,7 +286,7 @@ const UpdateInventoryItem = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} onClick={() => {
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false} onClick={() => {
                                     if (selectedOptionsCategories.value === 0) {
                                         setSelectCategories_ErrorMessage('Please select an option.');
                                     } else {

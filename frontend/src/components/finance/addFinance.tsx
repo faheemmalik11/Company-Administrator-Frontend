@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { addFinanceData, getAllFinanceCategories } from 'services/finance';
 import Select from 'react-select';
 import Alert from 'UI/Alert';
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const financeInitialValues: IaddFinance = {
     finance_category_id: '',
@@ -111,7 +112,8 @@ const AddFinance = () => {
                     return (
                         <Form className="login__card-form">
                             <br />
-                            <div>Select a finance category
+                            <div>
+                                <label className={labelStyle}>Select a finance Category</label>
                                 <Select
                                     required
                                     //value={selectedOptions}
@@ -123,16 +125,16 @@ const AddFinance = () => {
                                     classNamePrefix="select" />
                                 {select_errorMessage && <p style={{ color: 'red' }}>{select_errorMessage}</p>}
                             </div>
-
+                            <br/>
                             <div>
-                                <label>Amount</label>
+                                <label className={labelStyle}>Amount</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         border="1px solid black"
                                         name="amount"
                                         type="number"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -140,24 +142,24 @@ const AddFinance = () => {
                                 <ErrorMessage name="amount" />
                             </div>
                             <div>
-                                <label>Tax Deduction</label>
+                                <label className={labelStyle}>Tax Deduction</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="tax_deduction"
                                         type="number"
-                                    //   className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
                             <div>
-                                <label>Check Number</label>
+                                <label className={labelStyle}>Check Number</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="check_number"
                                         type="text"
-                                    // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -165,13 +167,13 @@ const AddFinance = () => {
                                 <ErrorMessage name="check_number" />
                             </div>
                             <div>
-                                <label>Description</label>
+                                <label className={labelStyle}>Description</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="description"
                                         type="text"
-                                    //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -180,7 +182,7 @@ const AddFinance = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false} onClick={() => {
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false} onClick={() => {
                                     resetForm;
                                     if (selectedOptions.value === 0) {
                                         setSelect_ErrorMessage('Please select an option.');

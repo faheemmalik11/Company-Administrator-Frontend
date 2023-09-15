@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import Alert from "UI/updateAlert";
 import { IaddCategory } from "app/interfaces/inventory_addCategory";
 import { getInventoryCategorybyId, updateInventoryCategory } from "services/inventory_categories";
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const finance: IaddCategory = {
     name: '',
@@ -60,7 +61,7 @@ const UpdateInventoryCategory = () => {
              {isAlert && <Alert responseMessage={responseMessage}
                 setIsAlert={setIsAlert}
                  />}
-            <h1>Update Finance Data</h1>
+            <h1>Update Category Data</h1>
             <Formik
                 initialValues={categoryData}
                 validationSchema={validationSchema}
@@ -73,14 +74,14 @@ const UpdateInventoryCategory = () => {
                             <br />
 
                             <div>
-                                <label>Name</label>
+                                <label className={labelStyle}>Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div>
                                     <Field
                                         border="1px solid black"
                                         name="name"
                                         type="text"
-                                    //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -88,13 +89,13 @@ const UpdateInventoryCategory = () => {
                                 <ErrorMessage name="name" />
                             </div>
                             <div>
-                                <label>Description</label>
+                                <label className={labelStyle}>Description</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="description"
                                         type="text"
-                                    //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -103,7 +104,7 @@ const UpdateInventoryCategory = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false}>
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false}>
                                     Submit
                                 </button>
                             </div>

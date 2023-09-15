@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import SideBar from "components/side_bar";
 import CategoryTable from "./categoriesTable";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -21,9 +20,8 @@ const Categories = () => {
     }
     return(
         <React.Fragment>
-            {/* <SideBar /> */}
             <h1>Categories Section</h1>
-            <button onClick={handleAddStore}>Add new Store</button>
+            <button className="bg-sky-400" onClick={handleAddStore}>Add new Category</button>
             <CategoryTable update_id={updateId}/>
         </React.Fragment>
     )

@@ -1,7 +1,7 @@
 import React from "react"
 interface Props {
-    isSidebarItem: boolean;
-    sidebarItemHandler: () => void;
+    isSidebarItem: string;
+    sidebarItemHandler: (val:string) => void;
     itemName: string;
     src: string;
 }
@@ -9,12 +9,9 @@ const SidebarItems: React.FC<Props> = ({ isSidebarItem, sidebarItemHandler, item
     return (
         <React.Fragment>
             <h2
-                //  to={''}
-                // target={sidebarItem.text === 'Pop-Ups' ? '_blank' : '_self'}
-                // className='bg-gray-500'
-                onClick={sidebarItemHandler}>
+                onClick={()=>{sidebarItemHandler(itemName)}}>
                 <div
-                    className={`${isSidebarItem ? 'bg-primaryHover ' : ''
+                    className={`${isSidebarItem===itemName ? 'bg-primaryHover ' : ''
                         } flex justify-between items-center rounded 2xl:py-2.5 py-1 pl-6 pr-2.5 mt-3 group hover:bg-primaryHover group cursor-pointer`}>
                     <div className="flex items-center">
                         <span>
@@ -27,7 +24,7 @@ const SidebarItems: React.FC<Props> = ({ isSidebarItem, sidebarItemHandler, item
                             />
                         </span>
                         <span
-                            className={`${isSidebarItem ? 'text-white ' : ' text-foreground dark:text-white '
+                            className={`${isSidebarItem===itemName ? 'text-white ' : ' text-foreground dark:text-white '
                                 } lg:block
                                                  text-15 font-medium leading-3 dark:text-[#A4AAC7] dark:group-hover:text-[#495057] dark:text-[#CED4DA]  pl-3 sidebar-links group-hover:text-white`}>
                             {itemName}

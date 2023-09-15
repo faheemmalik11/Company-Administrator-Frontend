@@ -1,11 +1,11 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { login, loginUser } from 'services/auth';
+import { login } from 'services/auth';
 import React, { useContext } from 'react';
 import AuthContext from 'app/contexts/authContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState } from 'react';
-import Alert from './Alert';
+import Alert from 'UI/updateAlert';
 
 interface ISubmitProps {
     email: string;

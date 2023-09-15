@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { updateCompany } from 'services/companySetting';
 import { useNavigate } from 'react-router-dom';
 import Alert from 'UI/updateAlert';
+import { labelStyle, inputStyle } from 'UI/formStyle';
 
 const initialValues: IcompanySetting = {
     name: '',
@@ -67,7 +68,7 @@ const UpdateSetting = () => {
                  />}
             <h2>Update Setting</h2>
             <br/>
-            <button className='bg-sky-500/100' onClick={resetPasswordHandler}>Reset Password</button>
+            <button className='bg-sky-400' onClick={resetPasswordHandler}>Reset Password</button>
             <Formik
                 initialValues={companyData}
                 enableReinitialize
@@ -79,14 +80,14 @@ const UpdateSetting = () => {
                             <br />
 
                             <div>
-                                <label>Name</label>
+                                <label className={labelStyle}>Name</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         border="1px solid black"
                                         name="name"
                                         type="text"
-                                        //  className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -94,13 +95,13 @@ const UpdateSetting = () => {
                                 <ErrorMessage name="name" />
                             </div>
                             <div>
-                                <label>Phone No.</label>
+                                <label className={labelStyle}>Phone No.</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="phone"
                                         type="string"
-                                        //   className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -108,13 +109,13 @@ const UpdateSetting = () => {
                                 <ErrorMessage name="phone" />
                             </div>
                             <div>
-                                <label>Website</label>
+                                <label className={labelStyle}>Website</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div >
                                     <Field
                                         name="website"
                                         type="text"
-                                        // className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -122,13 +123,13 @@ const UpdateSetting = () => {
                                 <ErrorMessage name="website" />
                             </div>
                             <div>
-                                <label>Address</label>
+                                <label className={labelStyle}>Address</label>
                                 <br />
-                                <div style={{ border: '1px solid black' }}>
+                                <div>
                                     <Field
                                         name="address"
                                         type="text"
-                                        //    className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')}
+                                        className={inputStyle}
                                     />
                                 </div>
                             </div>
@@ -137,7 +138,7 @@ const UpdateSetting = () => {
                             </div>
 
                             <div className="login__buttons">
-                                <button className="btn login__card-btn" type="submit" disabled={false}>
+                                <button className="btn login__card-btn bg-sky-400" type="submit" disabled={false}>
                                     Submit
                                 </button>
                             </div>
